@@ -1,0 +1,16 @@
+.middle-box h1{
+    font-size: 80px;
+}
+.loginColumns{
+    max-width: 400px;
+}
+.invalid-feedback{
+  color:#dc3545 ;
+  width:100%; 
+  text-align: left;
+  display: inline-block;
+}
+.form-control:focus,
+.single-line:focus {
+  border-color: #72baf3  !important;
+}
