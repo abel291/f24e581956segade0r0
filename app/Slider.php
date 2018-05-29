@@ -5,12 +5,12 @@
  * Date: Fri, 25 May 2018 21:59:41 +0000.
  */
 
-namespace App\Models;
+namespace App;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class SoSlider
+ * Class Slider
  * 
  * @property int $id
  * @property string $main_img
@@ -22,20 +22,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class SoSlider extends Eloquent
-{
-	public $timestamps = false;
+class Slider extends Eloquent
+{	
 
 	protected $casts = [
 		'activo' => 'bool'
 	];
 
 	protected $fillable = [
-		'main_img',
-		'txt_linea_a',
-		'txt_linea_b',
-		'txt_color',
+		'title',
+		'img',
+		'content',
 		'href',
-		'activo'
+		'activo'		
 	];
 }

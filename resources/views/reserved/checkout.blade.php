@@ -79,7 +79,7 @@
                                         <li>
                                             <div class="product-item">
                                                 <a target="_blanck" href="{{route('product',[$product->category,$product->slug])}}" class="product-img">
-                                                    <img src="{{url('/segade/img/'.$product->img)}}" alt="">
+                                                    <img src="{{$product->img}}" alt="">
                                                     <span>{{$product->quantity}}</span>
                                                 </a><!-- .product-mini__img -->
                                                 <div class="product-body">

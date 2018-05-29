@@ -38,7 +38,7 @@ class Image extends Eloquent
 
 	public function product()
 	{
-		return $this->belongsTo(\App\Models\SoProduct::class, 'so_products_id');
+		return $this->belongsTo(\App\Product::class, 'so_products_id');
 	}
 	
 }

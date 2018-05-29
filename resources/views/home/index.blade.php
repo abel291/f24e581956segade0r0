@@ -32,7 +32,7 @@
                     data-splitin="none" 
                     data-splitout="none"                            
                     data-responsive_offset="on" 
-                    style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">30% de descuento <br> en anillos <br>y pulsera <br>por todo el <br>mes de noviembre  
+                    style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">30% de descuento <br> en anillos <br>y pulseras <br>por todo el <br>mes de noviembre  
                 </div>                    
 
                 <li data-transition="fade"> 
@@ -60,7 +60,7 @@
                     data-splitin="none" 
                     data-splitout="none"                            
                     data-responsive_offset="on" 
-                    style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">Nuevos<br> anillos<br> y pulseras<br> con diamante 
+                    style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">Nuevos<br> anillos<br> y pulseras<br> con diamantes 
                 </div>
 
                 <!-- LAYER NR. 3 -->
@@ -84,7 +84,7 @@
                     <img src="{{url('/segade/img/h33.jpg')}}" alt="promotion"/>
                     <div class="promotionbox-content">
                         <h3>COLGANTE PLATA PRIMERA LEY(NUEVOS)</h3>
-                        <a href="#" title="Shop Now">Shop Now<span class="arrow_right" aria-hidden="true"></span></a>
+                        <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
                     </div>
                 </div>
             </div><!-- PromotionBox Layout3 /- -->
@@ -131,85 +131,34 @@
 </div>
 <div class="section pt-7 pb-7">
     <div class="container">                     
-        <div class="row">
-            <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                <div class="text-center mb-2">
-                    <div class="os-font double_lined">
-                        <h4 class="fw-normal ">Mas Apartado</h4>
-                    </div>
-                </div>
-                <ul class="product-list">
-                    @include('partial.mas_apartados',[$mas_apartados])
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+        <div class="row">            
+            <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                 <div class="text-center mb-2">
                     <div class="os-font double_lined">
                         <h4 class="fw-normal ">Recien Agregados</h4>
                     </div>
                 </div>
-                <ul class="product-list">
-                   @foreach($recientes as $product)
-                    <li class="product">
-                        <div class="product-thumb-wrap">
-                            <div class="product-thumb">
-                                {{$product->slug}}
-                                <a href="{{route('product',[$product->category_slug,$product->slug])}}">
-                                    <img src="{{url('/segade/img/'.$product->img)}}" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <a href="shop-detail.html">
-                                <h3 class="os-font  fw-600">{{$product->title}}</h3>
-                            </a>
-                        </div>
-                        <div class="os-font price  fw-600">$&nbsp;{{$product->price}}</div>
-                    </li>
-                    @endforeach                    
-                </ul>
+                <div class="col-md-6">
+                    @include('partial.list_small',['products'=>$recientes->take(5)])
+                </div>
+                <div class="col-md-6">
+                    @include('partial.list_small',['products'=>$recientes->slice(5)])
+                </div>                
+                
             </div>
-            <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+            <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                 <div class="text-center mb-2">
                     <div class="os-font double_lined">
-                        <h4 class="fw-normal ">Economicos</h4>
+                        <h4 class="fw-normal ">Económicos</h4>
                     </div>
                 </div>
-                <ul class="product-list">
-                @foreach($economicos as $product)
-                    <li class="product">
-                        <div class="product-thumb-wrap">
-                            <div class="product-thumb">
-                                {{$product->slug}}
-                                <a href="{{route('product',[$product->category_slug,$product->slug])}}">
-                                    <img src="{{url('/segade/img/'.$product->img)}}" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <a href="shop-detail.html">
-                                <h3 class="os-font  fw-600">{{$product->title}}</h3>
-                            </a>
-                        </div>
-                        <div class="os-font price  fw-600">$&nbsp;{{$product->price}}</div>
-                    </li>
-                    @endforeach      
-                </ul>
-            </div>
-            @if(count($mas_apartados))
-            <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                <div class="text-center mb-2">
-                    <div class="os-font double_lined">
-                        <h4 class="fw-normal ">Popular</h4>
-                    </div>
+                <div class="col-md-6">
+                    @include('partial.list_small',['products'=>$economicos->take(5)])
                 </div>
-                <div class="text-center">
-                    <a href="{{route('product',[$product->category_slug,$product->slug])}}">
-                        <img src="{{url('/segade/img/'.$mas_apartados->random()->img)}}" alt="">
-                    </a>
+                <div class="col-md-6">
+                    @include('partial.list_small',['products'=>$economicos->slice(5)])
                 </div>
-            </div>
-            @endif
+            </div>            
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('/segade/img/favicon.ico')}}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -34,13 +34,16 @@
                     </li>
                     
                     <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
-                        <a href="{{url('/dashboard')}}"><i class="fa fa-house"></i> <span class="nav-label">Home</span></a>
+                        <a href="{{url('/dashboard')}}"><i class="fa fa-th-large"></i><span class="nav-label">Home</span></a>
+                    </li>
+                    <li class="{{ Request::is('dashboard/slider') ? 'active' : '' }}">
+                        <a href="{{url('/dashboard/slider')}}"><i class="fa fa-file-image-o"></i> <span class="nav-label">Slider</span></a>
                     </li>
                     <li class="{{ Request::is('dashboard/productos*') ? 'active' : '' }}">
-                        <a href="{{url('/dashboard/productos')}}"><i class="fa fa-house"></i> <span class="nav-label">Productos</span></a>
+                        <a href="{{url('/dashboard/productos')}}"><i class="fa fa-folder-open"></i> <span class="nav-label">Productos</span></a>
                     </li>
                     <li class="{{ Request::is('ordenes') ? 'active' : '' }}">
-                        <a href="{{url('/')}}"><i class="fa fa-house"></i> <span class="nav-label">Ordenes</span></a>
+                        <a href="{{url('/')}}"><i class="fa fa-archive"></i> <span class="nav-label">Ordenes</span></a>
                     </li>             
                     
                 </ul>
@@ -74,7 +77,22 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="modal_confirm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" ></h5>                            
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">                            
+                        <a href="#" class="btn btn-fill"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     <!-- Scripts -->
     <script src="{{ asset('assets/js/jquery-2.1.1.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>

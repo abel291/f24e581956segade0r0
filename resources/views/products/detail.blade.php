@@ -9,14 +9,22 @@
                             <div class="col-md-9">
                                 <div class="single-product">
                                     <div class="images">
-                                        <a href="{{url('/segade/img/'.$product->images->first()->images)}}" rel="prettyPhoto[product-gallery]">
-                                            <img src="{{url('/segade/img/'.$product->images->first()->images)}}" alt="">
-                                        </a>
-                                        <div class="thumbnails">
-                                            @foreach($product->images->slice(1) as $image)
-                                            <a  href="{{url('/segade/img/'.$image->images)}}" rel="prettyPhoto[product-gallery]">
-                                                <img src="{{url('/segade/img/'.$image->images)}}" alt="">
-                                            </a>   
+                                        
+                                        <div class="slider-for">
+                                            @foreach($product->images as $image)                                           
+                                            <div>
+                                                <a  href="{{$image->img}}" data-lightbox="image-1" data-title="{{$product->title}}">
+                                                    <img src="{{$image->thum}}"  style="width: 100%" class="img-responsive" alt="{{$product->title}}">
+                                                </a> 
+                                            </div>                                            
+                                            @endforeach                                         
+                                        </div>
+                                        <div class="slider-nav">
+                                            @foreach($product->images as $image)                                           
+                                            <div>                                       
+                                                <img src="{{$image->thum}}" class="img-responsive" alt="{{$product->title}}">                
+                                            </div>
+                                            
                                             @endforeach                                         
                                         </div>
                                     </div>
@@ -24,7 +32,7 @@
                                         <h1 class="product-title">{{$product->title}}</h1>
                                         
                                         <div class="price">                                         
-                                            <ins class="black">$&nbsp;{{$product->price}}</ins>
+                                            <ins class="black">${{number_format($product->price,2)}}</ins>
                                         </div>                                        
                                         <div class="add-to-cart-form">
                                             <form class="cart" action="{{route('add')}}" method="post">
@@ -77,37 +85,51 @@
                                             <h3 class="dark-color fw-600 fz-27">Productos relacionados</h3>
                                         </div>
                                         <ul class="products">
-                                            @foreach($products_related as $relacionado)
-                                            <li class="product col-md-4 col-sm-6">
-                                                <div class="product-thumb-wrap">
-                                                    <div class="product-thumb">
-                                                        <a href="{{route('product',[$relacionado->category_slug,$relacionado->slug])}}">
-                                                            <img src="{{url('/segade/img/'.$relacionado->img)}}" alt="">
-                                                        </a>
-                                                        <a href="{{route('product',[$relacionado->category_slug,$relacionado->slug])}}" class="product-add-cart">
-                                                            <span class="pull-left">Añadir a la cesta</span>
-                                                            <i class="pull-right fa fa-shopping-cart"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product-info">
-                                                    <a href="shop-detail.html">
-                                                        <h3 class="dark-color fw-600">{{$relacionado->title}}</h3>
-                                                    </a>                                                    
-                                                </div>
-                                                <div class="price dark-color fw-600">$&nbsp;{{$relacionado->price}}</div>
-                                            </li>
-                                            @endforeach
+                                           
+                                            @include('partial.list_product',['products'=>$products_related])
                                             
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                @include('partial.sidevar',[$mas_apartados])
+                                @include('partial.sidevar',['products'=>$economicos])
                             </div>
                         </div>
                     </div>
                 </div>
 
+@endsection
+@section('css')
+    <link href="{{asset('/segade/lightbox/css/lightbox.css') }}" rel="stylesheet">
+    <link href="{{asset('/segade/slick/slick.css') }}" rel="stylesheet">
+    <link href="{{asset('/segade/slick/slick-theme.css') }}" rel="stylesheet">
+@endsection
+
+@section('js')
+
+    <script   src="{{ asset('/segade/lightbox/js/lightbox.js') }}" type="text/javascript"></script>
+    <script   src="{{ asset('/segade/slick/slick.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    lightbox.option({
+      'resizeDuration': 800,
+      'wrapAround': true
+    })
+
+     $('.slider-for').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  fade: true,
+  asNavFor: '.slider-nav'
+});
+    $('.slider-nav').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      asNavFor: '.slider-for',
+      /*dots: true,*/
+      centerMode: true,
+      focusOnSelect: true
+    });
+</script>
 @endsection

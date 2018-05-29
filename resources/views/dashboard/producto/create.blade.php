@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app')
-@section('title', 'Crear Producto')
+@section('title', (!$edit ? 'Crear':'Editar').' Producto' )
 @section('content')
 @include('dashboard.notificaciones.notificaciones')
 <div class="row">
@@ -9,138 +9,21 @@
 	            <h3>Producto</h3>
 	        </div> 
 			<div class="ibox-content">
-				<form  action="{{route('productos.store')}}" method="post" enctype="multipart/form-data">
-					{{ csrf_field() }}
-					<div class="tabs-container">
-						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#tab-1" > Producto info</a></li>
-							<li class=""><a data-toggle="tab" href="#tab-2"> Datos</a></li>				
-							<li ><a data-toggle="tab" href="#tab-4" > Imagenes</a></li>
-						</ul>
-						<div class="tab-content">
-							<div id="tab-1" class="tab-pane active">
-								<div class="panel-body">
-
-									<fieldset class="form-horizontal">
-										<div class="form-group"><label class="col-sm-2 control-label">Nombre:</label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control"   name="nombre" value="{{ old('nombre') }}">
-											</div>
-										</div>
-										<div class="form-group"><label class="col-sm-2 control-label">Precio:</label>
-											<div class="col-sm-10">
-												<input type="number" class="form-control" name="precio" value="{{old('precio')}}">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Descripcion:</label>
-											<div class="col-sm-10">
-												<textarea class="input-block-level" id="summernote" name="descripcion"  rows="18">{{old('descripcion')}}</textarea>
-											</div>
-										</div>							
-									</fieldset>
-
-								</div>
-							</div>
-							<div id="tab-2" class="tab-pane">
-								<div class="panel-body">
-
-									<fieldset class="form-horizontal">							
-										<div class="form-group"><label class="col-sm-2 control-label">Marca:</label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control" name="marca" value="{{old('marca')}}">
-											</div>
-										</div>
-										<div class="form-group"><label class="col-sm-2 control-label">Modelo:</label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control" name="modelo" value="{{old('modelo')}}">
-											</div>
-										</div>							
-										<div class="form-group"><label class="col-sm-2 control-label">Cantidad:</label>
-											<div class="col-sm-10">
-												<input type="number" class="form-control" name="cantidad" value="{{old('cantidad')}}">
-											</div>
-										</div>
-										<div class="form-group"><label class="col-sm-2 control-label">Cantidad Minima:</label>
-											<div class="col-sm-10">
-												<input type="number" class="form-control" name="cantidad_min" value="{{old('cantidad_min')}}">
-											</div>
-										</div>
-										
-										<div class="form-group"><label class="col-sm-2 control-label">Status:</label>
-											<div class="col-sm-10">
-												<select class="form-control" name="status">
-													<option value="publicada">Publicada</option>
-													<option value="pausada">Pausada</option>
-												</select>
-											</div>
-										</div>
-									</fieldset>
-
-
-								</div>
-							</div>				
-							<div id="tab-4" class="tab-pane">
-								<div class="panel-body">
-
-									<div class="table-responsive">
-										<table class="table table-bordered table-stripped">
-											<thead>
-												<tr>
-													<th>
-														Vista previa
-													</th>
-													<th>
-														Agregar Imagen
-													</th>										
-													<th>
-														opciones
-													</th>
-													<th><button class="btn btn-primary agregar_imagen"><b>+</b></button></th>
-												</tr>
-											</thead>
-											<tbody class="clone_imagen">
-												<tr style="display: none;">
-													<td class="text-center">
-														<img class="vista_previa img-responsive img_productos">
-													</td>
-													<td>
-														<input type="file" name="imagenes[]" class="form-control" accept="image/jpg,image/png">
-													</td>
+				
+				@if($edit)
+				{{ Form::open(['route' => ['productos.update',$product->id], 'method' => 'PUT', 'files' => true, 'id' => 'details-form']) }}
+				@else
+				{{ Form::open(['route' => 'productos.store', 'method' => 'post', 'files' => true, 'id' => 'details-form']) }}
+				@endif	
+					@include('dashboard.producto.form')
 													
-													<td>
-														<button class="btn btn-red remover_imagen"><i class="fa fa-trash"></i> </button>
-													</td>
-												</tr>
-												<tr >
-													<td class="text-center">
-														<img class="vista_previa img-responsive img_productos">
-													</td>
-													<td>
-														<input type="file" name="imagenes[]"  class="form-control" accept="image/jpg,image/png">
-													</td>
-													
-													<td>
-														<button class="btn btn-red remover_imagen"><i class="fa fa-trash"></i> </button>
-													</td>
-												</tr>									
-												
-											</tbody>
-										</table>
-									</div>
-
-								</div>
-							</div>							
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-xs-12 text-right">
+							<button type="submit" class="btn btn-primary">Guardar</button>
 						</div>
-						
 					</div>
 				
-				<div class="row" style="margin-top: 10px;">
-					<div class="col-xs-12 text-right">
-						<button type="submit" class="btn btn-primary">Guardar</button>
-					</div>
-				</div>
-				</form>
+				 {{ Form::close() }}
 			</div>
 		</div>
 	</div>
@@ -152,7 +35,7 @@
     <link href="{{asset('assets/css/plugins/summernote/summernote-bs3.css') }}" rel="stylesheet">
 
     <style type="text/css">
-
+    
     </style>
 @endsection
 @section('js')
@@ -171,7 +54,7 @@
 			event.preventDefault();
 			console.log('on')
 			clone=$('.clone_imagen tr:first').clone(true);
-			$('.clone_imagen').append(clone.show());		
+			$('.clone_imagen').append(clone.show());				
 						
 		});
 		$(document).on('click', '.remover_imagen', function(event) {				
@@ -206,6 +89,20 @@
 		     	}
 		 	}
 		});
+		$(document).on('click', '.remover_imagen_bd ', function(event) {
+		   		event.preventDefault();
+		   		
+		   		url=$(this).attr('id');
+		   		$('.modal .modal-title').text('Borrar Imagen')
+		   		$('.modal .modal-body').text('Desea Borrar la iamgen?')
+		   		$('.modal .modal-footer .btn')
+		   		.text('Borrar Imagen0 ')
+		   		.attr('href', url)
+		   		.removeClass('btn-success')
+		   		.addClass('btn-danger');	   
+		});
+
+	
 });//ready
 
 	

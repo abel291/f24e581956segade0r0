@@ -16,7 +16,11 @@ class Pages extends Migration
         Schema::create('pages', function(Blueprint $table) {
             $table->engine = 'InnoDB';        
             $table->increments('id');
-            $table->string('title', 120);
+            $table->string('phone', 120);
+            $table->string('address', 120);
+            $table->string('map', 120);
+            $table->string('email', 120);
+            $table->text('note');            
             $table->string('slug', 40);
             $table->text('entry');
             $table->text('content');

@@ -14,7 +14,7 @@ use Faker\Generator as Faker;
 */
 App\Product::truncate();
 $factory->define(App\Product::class, function (Faker $faker) {
-	$name=$faker->randomElement(['Anillos','Pulseras','Collares','Cadenas','Colgantes','Pendientes']).' '.$faker->citySuffix      .' '.$faker->state;
+	$name=$faker->randomElement(['Anillos','Pulseras','Collares','Cadenas','Colgantes','Pendientes']).' '.$faker->citySuffix      .' '.$faker->state.' '.$faker->citySuffix.' '.$faker->state;
     return [
         'title' => $name,
         'slug' => str_slug($name),

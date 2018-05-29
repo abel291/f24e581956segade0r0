@@ -17,74 +17,81 @@ class categoria extends Seeder
         	[ 
         		'name'    => 'Anillos',
     	        'slug'    =>'anillos',
-                'activo'  => 1,	                
+                'activo'  => 0,	                
         	],
             [ 
                 'name'    =>'Pulseras',
                 'slug'    =>'pulseras',
-                'activo'  => 1,                  
+                'activo'  => 0,                  
             ],
             [ 
                 'name'    =>'Collares',
                 'slug'    =>'collares',
-                'activo'  => 1,                  
+                'activo'  => 0,                  
             ],
             [ 
                 'name'    =>'Cadenas',
                 'slug'    =>'cadenas',
-                'activo'  => 1,                  
+                'activo'  => 0,                  
             ],
             [ 
                 'name'    =>'Colgantes',
                 'slug'    =>'colgantes',
-                'activo'  => 1,                  
+                'activo'  => 0,                  
             ],
             [ 
                 'name'    =>'Pendientes',
                 'slug'    =>'pendientes',
-                'activo'  => 1,                  
+                'activo'  => 0,                  
             ],
             [ 
                 'name'    =>'Joyas con diamantes',
                 'slug'    =>'joyas',
-                'activo'  => 1,                  
+                'activo'  => 0,                  
             ]
         ]);
 
         DB::table('images')->truncate();
         $products=\App\Product::get();          
-        foreach ($products as $product) {
-            $img=rand(1,8);
-            $product->img='p'.rand(1,8).'.jpg';
+        foreach ($products as $product) { 
+            
+
+            $product->img='https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/thum/p'.rand(1,8).'.jpg';
             $product->save();
+            
             DB::table('images')->insert([
             [ 
-                'images' => $product->img,
+                'img' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/thum/p'.rand(1,8).'.jpg',
+                'thum' => $product->img,
                 'activo' => 1,
                 'so_products_id'=>$product->id                  
             ],
             [ 
-                'images' => 'p'.rand(1,8).'.jpg',
-                'activo' => 1,
+                'img' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/img/p'.rand(1,8).'.jpg',
+                'thum' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/thum/p'.rand(1,8).'.jpg',
+                'activo' => 0,
                 'so_products_id'=>$product->id                  
             ],
             [ 
-                'images' => 'p'.rand(1,8).'.jpg',
-                'activo' => 1,
+                'img' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/img/p'.rand(1,8).'.jpg',
+                'thum' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/thum/p'.rand(1,8).'.jpg',
+                'activo' => 0,
                 'so_products_id'=>$product->id                  
             ],
             [ 
-                'images' => 'p'.rand(1,8).'.jpg',
-                'activo' => 1,
+                'img' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/img/p'.rand(1,8).'.jpg',
+                'thum' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/thum/p'.rand(1,8).'.jpg',
+                'activo' => 0,
                 'so_products_id'=>$product->id                  
             ],
             [ 
-                'img' => 'p'.rand(1,8).'.jpg',
-                'activo' => 1,
+                'img' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/img/p'.rand(1,8).'.jpg',
+                'thum' => 'https://segadeoro.s3.us-east-2.amazonaws.com/segadeoro/thum/p'.rand(1,8).'.jpg',
+                'activo' => 0,
                 'so_products_id'=>$product->id                  
             ]            
         ]);
-            echo $product->title."\n";
+            echo $product->img."\n";
         }
         
     }

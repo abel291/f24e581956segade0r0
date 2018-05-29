@@ -8229,8 +8229,18 @@ body.md-skin {
 }
 .img_productos{
   display: inline-block;
-  max-width: 300px
+  width: 380px;
+  height: 260px;
 }
 td.status_proyecto span{
   text-transform: capitalize;
 }
+
+.slider_img_list{
+  max-width: 380px;
+  display: inline-block;
+}
+td.slider_img{
+  text-align: center;
+}
+

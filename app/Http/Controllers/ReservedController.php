@@ -17,11 +17,9 @@ class ReservedController extends Controller
         	return redirect()->back()->withErrors('La cantida minima de este producto es de '.$product->quantity_min);
         }
         
-        $reserved=(new ReservedProduct)->fill($product->toArray());
-        $reserved=$reserved->fill($request->all());        
-        $reserved->img=$product->images->first()->images;      
-        $reserved->category=$product->category->name;    
-        
+        $reserved=(new ReservedProduct)->fill($product->toArray());        
+        $reserved=$reserved->fill($request->all());   
+        $reserved->category=$product->category->name; 
         $reserved->user()->associate(auth()->user()->id);
         $reserved->save();
         

@@ -2,11 +2,11 @@
 <li class="product col-sm-6 col-md-4">
     <div class="product-thumb-wrap">
         @if(date('d-m-Y')==$product->updated_at->format('d-m-Y'))
-        <span class="onsale">hoy!</span>
+        <span class="onsale">nuevo!</span>
         @endif
         <div class="product-thumb">
             <a href="{{route('product',[$product->category_slug,$product->slug])}}">
-                <img src='{{url("/segade/img/".$product->img)}}' style="height:260px;" alt="">
+                <img src='{{$product->img}}' alt="">
             </a>
             <a href="{{route('product',[$product->category_slug,$product->slug])}}" class="product-add-cart">
                 <span class="pull-left">Añadir a la cesta</span>
@@ -16,12 +16,13 @@
     </div>
     <div class="product-info">
         <a href="{{route('product',[$product->category_slug,$product->slug])}}">
-            <h3 class="fw-600" title="{{$product->title}}">{{str_limit($product->title,25)}}</h3>
+            <div class="fw-600" title="{{$product->title}}">{{str_limit($product->title,55)}}</div>
         </a>
         <div class="product-cate">
             <a href="{{route('product',[$product->category_slug]) }}">{{$product->category_name}}</a>
+            <div class="price  fw-600">${{number_format($product->price,2)}}</div>
         </div>
     </div>
-    <div class="price  fw-600">$&nbsp;{{$product->price}}</div>
+    
 </li>
 @endforeach       

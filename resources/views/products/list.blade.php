@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-9">
                 @if( \Route::current()->getName() === 'search') )
-                <div class="commerce-result-count">{{$products->total()}} resultado encontrados</div>
+                <div class="commerce-result-count">{{$products->total()}} resultados encontrados</div>
                 @endif
                 
 
@@ -25,12 +25,16 @@
                 <ul class="products">
                     @include('partial.list_product',[$products])
                 </ul>
-                {{ $products->links('paginate') }}                     
+                {{ $products->appends(Request::except('page'))->links('paginate') }}                     
             </div>
             <div class="col-md-3">
-               @include('partial.sidevar',[$mas_apartados]) 
+               @include('partial.sidevar',['products'=>$economicos])
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+
+
+

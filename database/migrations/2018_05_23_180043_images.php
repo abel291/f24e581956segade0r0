@@ -15,8 +15,9 @@ class Images extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('images',120);
-            $table->boolean('activo')->default(1);
+            $table->string('img',150);            
+            $table->string('thum',150);        
+            $table->boolean('activo')->default(0);
             $table->integer('so_products_id')->unsigned();                                       
             $table->timestamps();
 

@@ -23,7 +23,8 @@ class Products extends Migration
             $table->integer('quantity_min');
             $table->string('img', 120)->nullable();            
             $table->boolean('activo')->default(1);
-            $table->integer('so_categories_id')->unsigned(); 
+            $table->integer('so_categories_id')->unsigned();
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
         

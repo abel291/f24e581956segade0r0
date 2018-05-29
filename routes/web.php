@@ -17,10 +17,16 @@
 
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
+
 Route::group(['prefix' => 'dashboard','middleware' => 'admin'], function() { 
 
-	Route::get('/', 'DashboardController@index')->name('dashboard');	 
-	Route::resource('/productos', 'ProductoController');  
+	Route::get('/', 'dashboard\DashboardController@index')->name('dashboard');	 
+	
+	Route::resource('/productos', 'dashboard\ProductController');
+	
+	Route::resource('/slider', 'dashboard\SliderController');
+	
+	Route::get('/img/{id}/delete', 'dashboard\ProductController@delete_img')->name('delete_img'); 
     
 });
 
@@ -43,6 +49,7 @@ Route::post('/apartar', 'ReservedController@store')->name('store_r')->middleware
 Route::get('/historial', 'ReservedController@history')->name('history')->middleware('auth');
 
 Route::get('/busqueda', 'ProductController@search')->name('search');
+
 Route::get('/{categoria}/{slug?}/', 'ProductController@product')->name('product');
 
 

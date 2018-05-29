@@ -31,7 +31,7 @@
                                             
                                             <td class="product-thumbnail">
                                                 <a target="_blanck" href="{{route('product',[$product->category,$product->slug])}}">
-                                                    <img src="{{url('/segade/img/'.$product->img)}}" alt="">
+                                                    <img src="{{$product->img}}" alt="">
                                                 </a>
                                             </td>
                                             <td class="product-name">
@@ -39,14 +39,15 @@
                                                 </a>
                                             </td>
                                             <td class="product-price">
-                                                $&nbsp;{{$product->price}}
+                                               ${{number_format($product->price,2)}}
                                             </td>
                                             <td class="product-quantity">
                                               {{$product->quantity}}
                                                 
                                             </td>
                                             <td class="product-subtotal">
-                                                $&nbsp;{{$product->quantity*$product->price}}
+                                                ${{number_format($product->quantity*$product->price,2)}}
+                                                
                                             </td>
                                             <td class="product-remove">
                                                 <a href="{{route('remove',$product->id)}}" class="remove">×</a>

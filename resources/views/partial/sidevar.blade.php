@@ -2,13 +2,13 @@
     <div class="widget widget_search">
         <form action="{{route('search')}}" method="get" id="searchform" class="form-search">
             <div class="">
-                <input type="text" value="" name="search" required id="search" class="highlighted" placeholder="Search this website...">                
+                <input type="text" value="" name="search" required id="search" class="highlighted" placeholder="que buscas?">                
                 <button type="submit"><i class="fa fa-search"></i></button>
             </div>
         </form>
     </div>
     <div class="widget widget_tags">
-        <h3 class="widget-title">Tag categorias</h3>
+        <h3 class="widget-title">Tag categorías</h3>
         <div class="tagcloud">
             <a href="{{route('product',['anillos'])}}">anillos</a>
             <a href="{{route('product',['pulseras'])}}">pulseras</a>
@@ -20,9 +20,9 @@
         </div>
     </div>
     <div class="widget widget_products">
-        <h3 class="widget-title">Top mas apartados</h3>
+        <h3 class="widget-title">Top mas económicos</h3>
         <ul class="product-list-widget">
-            @include('partial.mas_apartados',[$mas_apartados])
+            @include('partial.list_small',[$products])
         </ul>
     </div>
 </div>

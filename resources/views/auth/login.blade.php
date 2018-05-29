@@ -42,7 +42,7 @@
                                 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="register">
-                                <p>los registro se hacen manuales desde la tienda</p>                              
+                                <p>los registros se hacen manuales desde la tienda</p>                              
                             </div>
                         </div>
                     </div>

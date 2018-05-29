@@ -17,29 +17,58 @@
 					<th>id</th>
 					<th>Nombre</th>
 					<th>Precio</th>
-					<th>Cantidad</th>
+					<th>Cantidad disponible</th>
 					<th>Categoria</th>
 					<th>status</th>
 					<th>Acciones</th>
 				</tr>
 				</thead>
 				<tbody>
-				@foreach($productos as $producto)
+				@foreach($products as $product)
 
 				<tr>
-					<td>{{$producto->id}}</td>
-					<td>{{$producto->title}}</td>
-					<td>{{$producto->price}}</td>					
-					<td>{{$producto->quantity}}</td>					
-					<td>{{$producto->category->name}}</td>
-					<td class="status_proyecto">						
-						<span class="label {{($producto->activo)?'label-primary':'label-warning'}}">{{$producto->activo}}</span>
+					<td>{{$product->id}}</td>
+					<td>{{$product->title}}</td>
+					<td>${{ number_format($product->price,2) }}</td>					
+					<td>{{$product->quantity}}</td>					
+					<td>{{$product->category->name}}</td>
+					<td class="status_proyecto">
+						@if($product->activo)					
+						<span class="label label-primary">ACTIVO</span>
+						@else
+						<span class="label label-warning">DESACTIVO</span>
+						@endif
 					</td>
 					<td>
 						<div class="btn-group">
-							<a class="btn-white btn btn-xs">Ver</a>
-							<a href="{{route('productos.edit',$producto->id)}}" class="btn-white btn btn-xs">Editar</a>
-							<a class="btn-white btn btn-xs">Eliminar</a>
+							<a target="_black" href="{{route('product',[$product->category->name,$product->slug])}}" class="btn-white btn btn-xs">
+								Ver
+							</a>
+							
+							<a href="{{route('productos.edit',$product->id)}}" class="btn-white btn btn-xs">
+								Editar
+							</a>							
+							<a id="{{route('productos.destroy',$product->id)}}" class="btn-white btn btn-xs remover_product" data-toggle="modal" data-target="#modal_confirm{{$product->id}}">Eliminar</a>
+							
+							<div class="modal fade " id="modal_confirm{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+					            <div class="modal-dialog modal-sm" role="document">
+					                <div class="modal-content">
+					                    <div class="modal-header">
+					                    	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					                        <h5 class="modal-title" >{{$product->title}}</h5>                            
+					                    </div>
+					                    <div class="modal-body">
+					                        Desea borrar este producto
+					                    </div>
+					                    <div class="modal-footer">                            
+					                        {{ Form::open(array('route' => ['productos.destroy', $product->id],'method' => 'delete')) }}
+					                            <button class="btn btn-fill btn-danger" type="submit" >Borrar Poducto</button>
+					                        {{ Form::close() }}
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+
 						</div>
                     </td>
 										
@@ -90,6 +119,7 @@
                 }
             }
         });
+        
     });
 </script>
 @endsection

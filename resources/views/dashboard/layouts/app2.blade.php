@@ -62,7 +62,7 @@
                     <h2><b>Oro</b></h2>
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Categorias</h5>
+                            <h5>Categorías</h5>
                         </div>
                         <div class="ibox-content">
                             <ul>

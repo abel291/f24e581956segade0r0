@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ReservedProduct;
 use App\Product;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 class HomeController extends Controller
 {
     /**
@@ -25,6 +27,9 @@ class HomeController extends Controller
     public function index()
     {   
 
+        
+        
+
         //$products=Product::inRandomOrder()->paginate(6);
         $products=product::
             orderBy('id','desc')
@@ -37,8 +42,8 @@ class HomeController extends Controller
         )->get(); 
         //$products=Product::orderBy('id','desc')->get();
         $random=$products->random(6);
-        $recientes=$products->take(5);
-        $economicos=$products->sortBy('price')->take(5);
+        $recientes=$products->take(10);
+        $economicos=$products->sortBy('price')->take(10);
         //dd($mas_apartados->random(1));
 
         $mas_apartados=ReservedProduct::orderBy('id','desc')->where('status',2)->limit(50)->get();               

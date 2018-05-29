@@ -40,6 +40,12 @@ class Page extends Eloquent
 
 	protected $fillable = [
 		'title',
+		'phone',
+		'address',
+		'map',
+		'email',
+		'note',
+		
 		'slug',
 		'entry',
 		'content',
@@ -49,5 +55,6 @@ class Page extends Eloquent
 		'seo_keys',
 		'activo',
 		'date_modify'
+
 	];
 }

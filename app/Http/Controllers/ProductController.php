@@ -30,31 +30,27 @@ class ProductController extends Controller
             orderBy('id','desc')
             ->join('categories', 'products.so_categories_id', '=', 'categories.id')
             ->where('categories.slug',$slug_ca)            
+            ->where('products.activo',1)            
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
                     'categories.name as category_name'                
-            );      
-        
-        $mas_apartados=ReservedProduct::inRandomOrder('id','desc')->where('category',$slug_ca)->where('status',2)->limit(50)->get();     
-        $mas_apartados=$mas_apartados->groupBy('so_products_id');        
-        $mas_apartados = $mas_apartados->map(function ($item, $key) {            
-            return $item->first();
-        });
-        $mas_apartados = $mas_apartados->take(5);
-        
+            );
+        $economicos=$products;
+        $economicos=$economicos->get()->sortBy('price')->take(5);
         //list
         if (!$slug_pro) {    
             $products=$products->paginate(9);
             $products->search=$products->first()->category_name;
-            return view('products.list',compact('products','mas_apartados'));            
+            return view('products.list',compact('products','economicos'));            
         
         //detail
         }else{
-            $products=$products->get();             
+            $products=$products->get();
+            $economicos=$products->sortBy('price')->take(5);            
             $product=$products->where('slug',$slug_pro)->first();
             $products_related=$products->random(3);         
-            return view('products.detail',compact('product','products_related','mas_apartados'));        
+            return view('products.detail',compact('product','products_related','economicos'));        
         }     
 
         
@@ -65,20 +61,19 @@ class ProductController extends Controller
         $products=product::
             orderBy('id','desc')
             ->join('categories', 'products.so_categories_id', '=', 'categories.id')
-            ->where('products.title','like',"%$request->search%")            
+            ->where('products.title','like',"%$request->search%")
+            ->where('products.activo',1)          
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
                     'categories.name as category_name'                
-            )->paginate(9);      
-        $products->search =' Busqueda: '. $request->search;
-        $mas_apartados=ReservedProduct::orderBy('id','desc')->where('status',2)->limit(50)->get();     
-        $mas_apartados=$mas_apartados->groupBy('so_products_id');        
-        $mas_apartados = $mas_apartados->map(function ($item, $key) {            
-            return $item->first();
-        });
-        $mas_apartados = $mas_apartados->take(5);      
-        return view('products.list',compact('products','mas_apartados')); 
+            );
+        $economicos=$products;
+        $economicos=$economicos->get()->sortBy('price')->take(5);    
+        $products=$products->paginate(9);     
+        $products->search =' Búsqueda,: '. $request->search;        
+            
+        return view('products.list',compact('products','economicos')); 
     }
 
     

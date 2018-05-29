@@ -98,7 +98,7 @@
                                     </ul>
                                 </div>-->
                                     <div class="search">    
-                                        <a href="#" id="search" title="Search"><i class="fa fa-search"></i></a>
+                                        <a href="#" id="search" title="Buscar"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>              
                                 <div class="navbar-collapse collapse navbar-right" id="navbar">
@@ -107,7 +107,7 @@
                                             <a href="{{route('home')}}" >Inicio</a>                                
                                         </li>                           
                                         <li class="dropdown {{ \Route::current()->getName() === 'categories' ? 'active' : '' }} ">
-                                            <a href="{{route('categories')}}" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Categorias <i class="fa fa-angle-down"></i> </a>
+                                            <a href="{{route('categories')}}" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Categorías <i class="fa fa-angle-down"></i> </a>
                                             
                                             <ul class="dropdown-menu" role="menu">
                                                 <li><a href="{{route('product',['anillos'])}}">Anillos</a></li>
@@ -138,7 +138,7 @@
                                                     <li><a href="{{route('logout')}}">Cerrar sesion</a></li>                     
                                                 </ul>     
                                             @else
-                                                <a href="{{route('login')}}" > Inciar Sesion</a>      
+                                                <a href="{{route('login')}}" > Iniciar Sesion</a>      
                                             @endif                                                                  
                                         </li>   
                                     </ul>
@@ -149,7 +149,7 @@
                                 <button type="button" class="close"><i class="icon icon-arrows-circle-remove"></i></button>
                                 <form action="{{route('search')}}" method="get">
                                     <input type="search" name="search" placeholder="Como se llama el producto?" />
-                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
                                 </form>
                             </div><!-- Search Box /- -->
                             
@@ -170,17 +170,17 @@
                 <a href="#" title=""><img src="{{url('/segade/img/logo_b.png')}}" alt="segade oro" class="logo_footer" /></a>
                 
                 <p>5th Floor, ABC Building, 456 New Design St, Melbourne, Australia <span><a href="tel:+0049654781235">(+ 004) 965 478 1235</a> - <a href="hello@example.com">hello@example.com</a></span></p>
-                <ul>
+                <!--<ul>
                     <li><a href="#" title="twitter">twitter</a></li>
                     <li><a href="#" title="facebook">facebook</a></li>
                     <li><a href="#" title="google+">google+</a></li>
                     <li><a href="#" title="pinterest">pinterest</a></li>
                     <li><a href="#" title="dribbble">dribbble</a></li>
-                </ul>
+                </ul>-->
             </div>
         </div><!-- Container /- -->
         <div class="copyright">
-            <p>Copyrights &copy; 2016 by <span><a href="#">Shield</a></span>. All Rights Reserved </p>
+            <p>Copyrights &copy; 2016 by <span><a href="https://rocketfy.es">Rocketfy</a></span>. All Rights Reserved </p>
             <a class="backto-top" id="back-to-top" href="#"><i class="fa fa-long-arrow-up"></i></a>
         </div>
     </footer>
