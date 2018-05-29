@@ -23,7 +23,7 @@
                                         <input type="text" name="email" class="form-control" placeholder="EMAIL" required value="admin@admin.com">
                                     </div>
                                     <div class="form-group col-md-12 no-padding">
-                                        <input type="text" name="password" class="form-control" placeholder="CONTRASEÑA" required value="secret">
+                                        <input type="password" name="password" class="form-control" placeholder="CONTRASEÑA" required value="secret">
                                     </div> 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
