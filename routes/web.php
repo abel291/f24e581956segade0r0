@@ -26,7 +26,19 @@ Route::group(['prefix' => 'dashboard','middleware' => 'admin'], function() {
 	
 	Route::resource('/slider', 'dashboard\SliderController');
 	
-	Route::get('/img/{id}/delete', 'dashboard\ProductController@delete_img')->name('delete_img'); 
+	Route::get('/img/{id}/delete', 'dashboard\ProductController@delete_img')->name('delete_img');
+
+	Route::get('/apartados', 'dashboard\ReservedController@reserved')->name('d_reserved');
+
+	Route::get('/apartados/status', 'dashboard\ReservedController@status')->name('status');
+	
+	Route::get('/apartados/{reserved}/{status}/status', 'dashboard\ReservedController@status')->name('statu_reserved');
+
+	Route::resource('/usuarios', 'dashboard\UserController');
+
+
+	//Route::post('/reserved', 'dashboard\ReservedController@status');
+
     
 });
 

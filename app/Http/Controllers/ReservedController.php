@@ -61,7 +61,8 @@ class ReservedController extends Controller
      	->update([
      		'status' => 1,
      		'date_arrival' => $request->date_arrival,
-     		'hour' => $request->hour     		
+            'hour' => $request->hour,      
+     		'note' => $request->note  		
      	]);
      	return redirect()->route('history');
         

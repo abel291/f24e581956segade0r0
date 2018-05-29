@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="product-info">
-        <a href="shop-detail.html">
+        <a href="{{route('product',[$product->category_slug,$product->slug])}}">
             <h3 class="os-font  fw-600">{{$product->title}}</h3>
         </a>
         <div class="os-font price  fw-600">${{number_format($product->price,2)}}</div>

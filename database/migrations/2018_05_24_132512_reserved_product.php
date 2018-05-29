@@ -26,8 +26,7 @@ class ReservedProduct extends Migration
             $table->string('img',120); 
             $table->string('category',55);            
             $table->boolean('activo')->default(1);
-            $table->integer('status')->default(0); //0 sin apartar //1 apartado //2 entregado   
-                            
+            $table->integer('status')->default(0); //0 sin apartar //1 apartado //2 entregado //3 rechasado                            
             $table->integer('so_products_id')->unsigned(); 
             $table->integer('so_users_id')->unsigned(); 
             

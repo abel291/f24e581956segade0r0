@@ -36,14 +36,17 @@
                     <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
                         <a href="{{url('/dashboard')}}"><i class="fa fa-th-large"></i><span class="nav-label">Home</span></a>
                     </li>
+                    <li class="{{ Request::is('dashboard/usuarios') ? 'active' : '' }}">
+                        <a href="{{url('dashboard/usuarios')}}"><i class="fa fa-user"></i> <span class="nav-label">Clientes</span></a>
+                    </li>  
                     <li class="{{ Request::is('dashboard/slider') ? 'active' : '' }}">
                         <a href="{{url('/dashboard/slider')}}"><i class="fa fa-file-image-o"></i> <span class="nav-label">Slider</span></a>
                     </li>
                     <li class="{{ Request::is('dashboard/productos*') ? 'active' : '' }}">
                         <a href="{{url('/dashboard/productos')}}"><i class="fa fa-folder-open"></i> <span class="nav-label">Productos</span></a>
                     </li>
-                    <li class="{{ Request::is('ordenes') ? 'active' : '' }}">
-                        <a href="{{url('/')}}"><i class="fa fa-archive"></i> <span class="nav-label">Ordenes</span></a>
+                    <li class="{{ Request::is('dashboard/apartados') ? 'active' : '' }}">
+                        <a href="{{url('dashboard/apartados')}}"><i class="fa fa-archive"></i> <span class="nav-label">Ordenes</span></a>
                     </li>             
                     
                 </ul>

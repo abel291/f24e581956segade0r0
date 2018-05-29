@@ -8244,3 +8244,10 @@ td.slider_img{
   text-align: center;
 }
 
+/*section reserved*/
+ .footable_btn .btn{
+
+   margin-bottom: 0px!important;
+
+}
+

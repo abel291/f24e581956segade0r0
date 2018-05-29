@@ -12,10 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {	
     	Eloquent::unguard();
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');   	
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;'); 
+        $this->call(user::class);  	
         factory('App\User', 50)->create(); 
-        factory('App\Product', 200)->create(); 
-        $this->call(user::class);
+        factory('App\Product', 200)->create();        
         $this->call(categoria::class);
         
 
