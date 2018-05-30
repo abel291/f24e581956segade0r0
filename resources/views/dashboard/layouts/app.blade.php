@@ -95,13 +95,40 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm"  role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Borrar Usuario</h5>                            
+                    </div>
+                    <div class="modal-body">
+                        Realmente desea Borrar este usuario?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="" method="post">
+                            <input type="hidden" name="_method" value="delete" />
+                            {!! csrf_field() !!}
+                            <button class="btn btn-fill btn-danger fff" type="submit" >Borrar Usuario</button>
+                        </form>                          
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ 
         
     <!-- Scripts -->
     <script src="{{ asset('assets/js/jquery-2.1.1.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>   
     <script src="{{ asset('assets/js/plugins/pace/pace.min.js') }}"></script>
-    
+    <script type="text/javascript">
+        $(document).on('submit ', 'form', function(event) {
+            $('form button[type="submit"],form input[type="submit"]').attr('disabled',true);                          
+        });
+    </script>
     @yield('js')
 </body>
 </html>

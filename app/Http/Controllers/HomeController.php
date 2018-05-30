@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ReservedProduct;
+use App\Slider;
 use App\Product;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -31,6 +32,7 @@ class HomeController extends Controller
         
 
         //$products=Product::inRandomOrder()->paginate(6);
+        $sliders=Slider::get();
         $products=product::
             orderBy('id','desc')
             ->join('categories', 'products.so_categories_id', '=', 'categories.id')
@@ -44,16 +46,9 @@ class HomeController extends Controller
         $random=$products->random(6);
         $recientes=$products->take(10);
         $economicos=$products->sortBy('price')->take(10);
-        //dd($mas_apartados->random(1));
+        //dd($mas_apartados->random(1));     
 
-        $mas_apartados=ReservedProduct::orderBy('id','desc')->where('status',2)->limit(50)->get();               
-        $mas_apartados=$mas_apartados->groupBy('so_products_id');        
-        $mas_apartados = $mas_apartados->map(function ($item, $key) {            
-            return $item->first();
-        });
-        $mas_apartados = $mas_apartados->take(5);
-
-        return view('home.index',compact('random','mas_apartados','recientes','economicos'));
+        return view('home.index',compact('random','','recientes','economicos','sliders'));
     }
     public function categories($categories=null)
     {

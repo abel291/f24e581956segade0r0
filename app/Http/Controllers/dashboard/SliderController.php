@@ -46,7 +46,7 @@ class SliderController extends Controller
             'title'=>'required',
             'content'=>'required',            
             'href'=>'required',          
-            'img' => ' required|image|mimes:jpeg,jpg,png|max:1000',            
+            'img' => ' required|image|mimes:jpeg,jpg,png|max:10000',            
         ]);
  
         if ($v->fails())
@@ -71,7 +71,7 @@ class SliderController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -82,7 +82,9 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider=Slider::find($id);
+        $edit=true;
+        return view('dashboard.slider.create',compact('edit','slider'));
     }
 
     /**
@@ -94,7 +96,32 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $v = Validator::make($request->all(), [            
+            'title'=>'required',
+            'content'=>'required',            
+            'href'=>'required',          
+            'img' => 'nullable|image|mimes:jpeg,jpg,png|max:10000',            
+        ]);
+ 
+        if ($v->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+        
+        
+        $slider=Slider::find($id);
+        $slider->title=$request->title;
+        $slider->content=$request->content;
+        $slider->href=$request->href;        
+        $slider->tipo=$request->tipo;        
+         if ($request->hasFile('img')){
+            $files=$request->file('img');
+            $slider->img=$this->upload_img($files,$slider->title);
+        }        
+        $slider->save();
+
+        return redirect()->route('slider.index')
+            ->withSuccess('Datos guardados con exito');  
     }
 
     /**
@@ -113,9 +140,9 @@ class SliderController extends Controller
     public function upload_img($files,$title)
     {
                   
-        $img=\Image::make($files)->stream('jpg',100);                
-        //$filename='segadeoro/img/segadeoro_'.uniqid(5)."_".str_slug($title).'.jpg';     
-        $filename='segadeoro/sliders/segadeoro_dd.jpg';    
+        $img=\Image::make($files)->stream('jpg');                
+        $filename='segadeoro/img/'.uniqid(5)."_".str_slug($title).'.jpg';     
+        //$filename='segadeoro/img/segadeoro_dd.jpg';    
         Storage::put($filename,$img->__toString(),'public');                           
         return Storage::url($filename);   
         

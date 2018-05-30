@@ -14,7 +14,7 @@ class Blog extends Migration
     public function up()
     {
        Schema::create('blog', function(Blueprint $table) {
-            $table->engine = 'InnoDB';        
+            $table->engine = 'InnoDB'; 
             $table->increments('id');
             $table->integer('categoria');
             $table->string('titulo', 120);
@@ -26,7 +26,7 @@ class Blog extends Migration
             $table->string('seo_title', 55)->default(null);
             $table->string('seo_keys', 120)->default(null);
             $table->string('main_img', 120)->default(null);
-            $table->boolean('activo')->default(1);      
+            $table->boolean('activo')->default(1);
                     
         });
 

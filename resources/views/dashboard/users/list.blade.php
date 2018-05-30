@@ -8,7 +8,7 @@
 	@include('dashboard.notificaciones.notificaciones')
 	<div class="ibox float-e-margins">                   
 		<div class="ibox-title text-right">
-            <a href="{{route('usuarios.create')}}" class=""><b>Agregar user</b></a>
+            <a href="{{route('usuarios.create')}}" class=""><b><i class="fa fa-plus"></i> Agregar user</b></a>
         </div>
 		<div class="ibox-content">		
 			<table class="table datatable table-striped table-hover user_table">
@@ -36,27 +36,7 @@
 							<a href="{{route('usuarios.edit',$user->id)}}" class="btn-white btn btn-xs">
 								Editar
 							</a>							
-							<a  class="btn-white btn btn-xs user" data-toggle="modal" data-target="#modal_confirm{{$user->id}}">Eliminar</a>
-							
-							<div class="modal fade " id="modal_confirm{{$user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-					            <div class="modal-dialog modal-sm" role="document">
-					                <div class="modal-content">
-					                    <div class="modal-header">
-					                    	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					                        <h5 class="modal-title" >{{$user->title}}</h5>                            
-					                    </div>
-					                    <div class="modal-body">
-					                        Desea borrar este user
-					                    </div>
-					                    <div class="modal-footer">                            
-					                        {{ Form::open(array('route' => ['usuarios.destroy', $user->id],'method' => 'delete')) }}
-					                            <button class="btn btn-fill btn-danger" type="submit" >Borrar user</button>
-					                        {{ Form::close() }}
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-
+							<a id="{{route('usuarios.destroy',$user->id)}}" class="btn-white btn btn-xs modal_delete" data-toggle="modal" data-target="#modal_delete">Eliminar</a>						
 						</div>
                     </td>
 										
@@ -81,7 +61,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.datatable').DataTable({
-             "order":[[ 0, 'desc' ]],
+            "order":[[ 0, 'desc' ]],
             "language": {
                 "sProcessing":     "Procesando...",
                 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -106,6 +86,13 @@
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             }
+        });
+
+        $(document).on('click', '.modal_delete ', function(event) {
+        	event.preventDefault();
+        	url=$(this).attr('id');        	
+        	$('.modal .modal-footer form')        	
+        	.attr('action', url) 		   
         });
         
     });

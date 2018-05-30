@@ -12,15 +12,23 @@
 					<div class="form-group"><label class="col-sm-2 control-label">Titulo:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control"   name="title" 
-							value="{{$edit? $product->title : old('title') }}">
+							value="{{$edit? $slider->title : old('title') }}">
 						</div>
 					</div>
 					<div class="form-group"><label class="col-sm-2 control-label">Link:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control"   name="href" 
-							value="{{$edit? $product->href : old('href') }}">
+							value="{{$edit? $slider->href : old('href') }}">
 						</div>
 					</div>
+					<div class="form-group"><label class="col-sm-2 control-label">Tipo de slider:</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="tipo">
+								<option {{$edit && $slider->tipo==1?'selected':''}} value="1">Slider pequeño</option>
+								<option {{$edit && $slider->tipo==0?'selected':''}} value="0">Slider grande</option>
+							</select>
+						</div>
+					</div>	
 					<div class="form-group"><label class="col-sm-2 control-label">Status:</label>
 						<div class="col-sm-10">
 							<select class="form-control" name="activo">
@@ -32,9 +40,8 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Contenido imagen:</label>
 						<div class="col-sm-10">
-							<textarea class="input-block-level" id="summernote" name="content"  rows="18">
-								{{$edit? $product->content : old('content') }}
-								<h1 style="line-height: 1;te">Ofertas&nbsp;<br>en&nbsp;<br>diamantes<br></h1>
+							<textarea class="input-block-level" id="summernote" name="content" rows="18">
+								{{$edit? $slider->content : old('content') }}								
 							</textarea>
 						</div>
 					</div>							
@@ -49,12 +56,12 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Imagen:</label>
 						<div class="col-sm-10">
-							<input type="file" name="img" required  class="form-control" accept="image/jpg,image/png">
+							<input type="file" name="img" {{!$edit? 'required' :''}}  class="form-control" accept="image/png,image/jpeg,image/jpg">
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 50px;">
 						<div class="col-sm-12">
-							<img class="vista_previa img-responsive">
+							<img src="{{$edit? $slider->img :''}}" class="vista_previa img-responsive">
 						</div>
 					</div>							
 				</fieldset>

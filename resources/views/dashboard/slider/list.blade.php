@@ -8,7 +8,7 @@
 	@include('dashboard.notificaciones.notificaciones')
 	<div class="ibox float-e-margins">                   
 		<div class="ibox-title text-right">
-            <a href="{{route('slider.create')}}" class=""><b>Agregar Slider</b></a>
+            <a href="{{route('slider.create')}}"><b><i class="fa fa-plus"></i> Agregar Slider</b></a>
         </div>
 		<div class="ibox-content">		
 			<table class="table datatable table-striped table-hover slider_table">
@@ -17,8 +17,7 @@
 					<th>id</th>
 					<th>img</th>
 					<th>Titulo</th>
-					<th>Link</th>
-					<th>Descripcion</th>					
+					<th>Link</th>									
 					<th>status</th>
 					<th>Acciones</th>
 				</tr>
@@ -28,10 +27,9 @@
 
 				<tr>
 					<td>{{$slider->id}}</td>
-					<td class="slider_img"><a target="_black" href="{{$slider->img}}"><img src="{{$slider->img}}" class="img-responsive slider_img_list"></a></td>
+					<td class="slider_img"><img src="{{$slider->img}}" class="img-responsive slider_img_list"></td>
 					<td>{{$slider->title}}</td>
-					<td>{{$slider->href}}</td>
-					<td>{{$slider->description}}</td>								
+					<td><a target="_black" href="{{$slider->href}}">{{$slider->href}}</a></td>													
 					<td>
 						@if($slider->activo)					
 						<span class="label label-primary">Publicada</span>

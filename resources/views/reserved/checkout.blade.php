@@ -84,7 +84,7 @@
                                                 </a><!-- .product-mini__img -->
                                                 <div class="product-body">
                                                     <h4 class="product-name"><a href="#">{{$product->title}}</a></h4>
-                                                    <span class="product-price">${{number_format($product->price,2)}} x {{$product->quantity}}</span>
+                                                    <span class="product-price">€{{number_format($product->price,2)}} x {{$product->quantity}}</span>
                                                 </div><!-- .product-mini__body -->
 
                                                 <div class="product-button">

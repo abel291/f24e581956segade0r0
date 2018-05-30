@@ -41,7 +41,7 @@
                                                 <a href="{{route('product',[$product->category,$product->slug])}}">{{$product->title}}</a>
                                             </td>
                                             <td class="product-price">
-                                                ${{number_format($product->price,2)}}
+                                                €{{number_format($product->price,2)}}
                                             </td>
                                             <td class="product-quantity">
                                               {{$product->quantity}}
@@ -63,7 +63,7 @@
 
                                             </td>
                                             <td class="product-subtotal">
-                                                ${{number_format($product->quantity*$product->price,2)}}
+                                                €{{number_format($product->quantity*$product->price,2)}}
                                             </td>                                            
                                         </tr>
                                         @endforeach

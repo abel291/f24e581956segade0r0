@@ -14,7 +14,7 @@
                 <h3 class="os-font  fw-600">{{$product->title}}</h3>
             </a>
         </div>
-        <div class="os-font price  fw-600">${{number_format($product->price,2)}}</div>
+        <div class="os-font price  fw-600">€{{number_format($product->price,2)}}</div>
     </li>
     @endforeach
 
@@ -27,7 +27,7 @@
             <span class="product-title">{{$product->title}}</span>
         </a>
         <div class="price">
-            ${{number_format($product->price,2)}}
+            €{{number_format($product->price,2)}}
         </div>
     </li>
     @endforeach

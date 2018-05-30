@@ -8,7 +8,7 @@
 	@include('dashboard.notificaciones.notificaciones')
 	<div class="ibox float-e-margins">                   
 		<div class="ibox-title text-right">
-            <a href="{{route('productos.create')}}" class=""><b>Agregar Producto</b></a>
+            <a href="{{route('productos.create')}}" class=""><b> <i class="fa fa-plus"></i> Agregar Producto</b></a>
         </div>
 		<div class="ibox-content">		
 			<table class="table datatable table-striped table-hover">
@@ -29,7 +29,7 @@
 				<tr>
 					<td>{{$product->id}}</td>
 					<td>{{$product->title}}</td>
-					<td>${{ number_format($product->price,2) }}</td>					
+					<td>€{{ number_format($product->price,2) }}</td>					
 					<td>{{$product->quantity}}</td>					
 					<td>{{$product->category->name}}</td>
 					<td class="status_proyecto">

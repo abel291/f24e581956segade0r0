@@ -71,7 +71,7 @@ class ProductController extends Controller
         $economicos=$products;
         $economicos=$economicos->get()->sortBy('price')->take(5);    
         $products=$products->paginate(9);     
-        $products->search =' Búsqueda,: '. $request->search;        
+        $products->search =' Búsqueda: '. $request->search;        
             
         return view('products.list',compact('products','economicos')); 
     }

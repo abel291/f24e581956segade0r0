@@ -11,7 +11,7 @@
 			<div class="ibox-content">
 				
 				@if($edit)
-				{{ Form::open(['route' => ['slider.update',$product->id], 'method' => 'PUT', 'files' => true, 'id' => 'details-form']) }}
+				{{ Form::open(['route' => ['slider.update',$slider->id], 'method' => 'PUT', 'files' => true, 'id' => 'details-form']) }}
 				@else
 				{{ Form::open(['route' => 'slider.store', 'method' => 'post', 'files' => true, 'id' => 'details-form']) }}
 				@endif	

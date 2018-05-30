@@ -32,7 +32,7 @@
                                         <h1 class="product-title">{{$product->title}}</h1>
                                         
                                         <div class="price">                                         
-                                            <ins class="black">${{number_format($product->price,2)}}</ins>
+                                            <ins class="black">€{{number_format($product->price,2)}}</ins>
                                         </div>                                        
                                         <div class="add-to-cart-form">
                                             <form class="cart" action="{{route('add')}}" method="post">

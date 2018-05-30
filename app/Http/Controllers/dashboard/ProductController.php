@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function store(Request $request,Product $producto)
     {
         $v = Validator::make($request->all(), [            
-            'title'         =>'required',
+            'title'         =>'required|unique:products',
             'content'       =>'required',
             'price'         =>'required|min:0',
             'quantity'      =>'required|min:0',            
@@ -165,9 +165,10 @@ class ProductController extends Controller
 
                 $img_normal=\Image::make($value)->stream('jpg',60); 
                 $img_thum=\Image::make($value)->resize(365,260)->stream('jpg',60);
-                //$filename='segadeoro/img/segadeoro_'.uniqid(5)."_".str_slug($request->title).'.jpg';     
-                $filename_normal='segadeoro/img/segadeoro_dd.jpg';    
-                $filename_thum='segadeoro/thum/segadeoro_dd.jpg';    
+                $filename_normal='segadeoro/img/'.uniqid(5)."_".str_slug($request->title).'.jpg';     
+                $filename_thum='segadeoro/thum/'.uniqid(5)."_".str_slug($request->title).'.jpg';     
+                //$filename_normal='segadeoro/img/segadeoro_dd.jpg';    
+                //$filename_thum='segadeoro/thum/segadeoro_dd.jpg';    
                 
                 Storage::put($filename_normal,$img_normal->__toString(),'public');                           
                 Storage::put($filename_thum,$img_thum->__toString(),'public');

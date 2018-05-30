@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\dashboard;
 
+use App\Product;
+use App\User;
+use App\ReservedProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class DashboardController extends Controller
@@ -11,7 +14,11 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
     public function index($value='')
-    {
-    	return view('dashboard.index');
+    {	
+    	$products=Product::get();
+    	$users=User::get();
+    	$reserved=ReservedProduct::get();
+
+    	return view('dashboard.index',compact('products','users','reserved'));
     }
 }

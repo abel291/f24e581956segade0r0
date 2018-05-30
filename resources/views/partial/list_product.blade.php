@@ -20,7 +20,7 @@
         </a>
         <div class="product-cate">
             <a href="{{route('product',[$product->category_slug]) }}">{{$product->category_name}}</a>
-            <div class="price  fw-600">${{number_format($product->price,2)}}</div>
+            <div class="price  fw-600">€{{number_format($product->price,2)}}</div>
         </div>
     </div>
     

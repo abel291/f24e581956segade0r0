@@ -6,67 +6,61 @@
     <!-- START REVOLUTION SLIDER 5.0 -->
     <div class="rev_slider_wrapper">
         <div id="shop-slider1" class="rev_slider" data-version="5.0">
-            <ul> 
+            <ul>
+                @foreach($sliders as $slider)
                 <li data-transition="fade"> 
-                    <!-- MAIN IMAGE -->
-                    <img src="{{url('/segade/img/h11.jpg')}}"  alt="shop"  width="1170" height="587"> 
-                    <!-- LAYER NR. 1 -->
+                    <a href="{{$slider->href}}">
+                        <!-- MAIN IMAGE -->
+                        <img src="{{$slider->img}}"  alt="shop"  width="1170" height="587"> 
+                        <!-- LAYER NR. 1 -->
 
 
-                    <!-- LAYER NR. 2 -->
-                    <div class="tp-caption NotGeneric-SubTitle tp-resizeme rs-parallaxlevel-0 font-montserrat"
-                    id="slide-1-layer-2" 
-                    data-x="['left','left','left','left']" data-hoffset="['50','150','150','150']" 
-                    data-y="['top','top','top','top']" data-voffset="['185','185','185','185']" 
-                    data-fontsize="['40','40','40','30']"
-                    data-lineheight="['48','48','48','48']"
-                    data-width="auto"
-                    data-height="none"
-                    data-whitespace="noraml"
-                    data-transform_idle="o:1;"
-                    data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
-                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
-                    data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;" 
-                    data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
-                    data-start="1500" 
-                    data-splitin="none" 
-                    data-splitout="none"                            
-                    data-responsive_offset="on" 
-                    style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">30% de descuento <br> en anillos <br>y pulseras <br>por todo el <br>mes de noviembre  
-                </div>                    
-
-                <li data-transition="fade"> 
-                    <!-- MAIN IMAGE -->
-                    <img src="{{url('/segade/img/h22.jpg')}}"  alt="shop"  width="1170" height="587"> 
-                    <!--LAYER NR. 1 -->
-
-
-                    <!-- LAYER NR. 2 -->
-                    <div class="tp-caption NotGeneric-SubTitle tp-resizeme rs-parallaxlevel-0 font-montserrat"
-                    id="slide-2-layer-2" 
-                    data-x="['left','left','left','left']" data-hoffset="['150','150','150','150']" 
-                    data-y="['top','top','top','top']" data-voffset="['185','185','185','185']" 
-                    data-fontsize="['40','40','40','30']"
-                    data-lineheight="['48','48','48','48']"
-                    data-width="auto"
-                    data-height="none"
-                    data-whitespace="noraml"
-                    data-transform_idle="o:1;"
-                    data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
-                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
-                    data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;" 
-                    data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
-                    data-start="1500" 
-                    data-splitin="none" 
-                    data-splitout="none"                            
-                    data-responsive_offset="on" 
-                    style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">Nuevos<br> anillos<br> y pulseras<br> con diamantes 
+                            <!-- LAYER NR. 2 -->
+                        <div class="tp-caption NotGeneric-SubTitle tp-resizeme rs-parallaxlevel-0 font-montserrat"
+                            id="slide-1-layer-2" 
+                            data-x="['left','left','left','left']" data-hoffset="['50','150','150','150']" 
+                            data-y="['top','top','top','top']" data-voffset="['185','185','185','185']" 
+                            data-fontsize="['40','40','40','30']"
+                            data-lineheight="['48','48','48','48']"
+                            data-width="auto"
+                            data-height="none"
+                            data-whitespace="noraml"
+                            data-transform_idle="o:1;"
+                            data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+                            data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;" 
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+                            data-start="1500" 
+                            data-splitin="none" 
+                            data-splitout="none"                            
+                            data-responsive_offset="on" 
+                            style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">{!!$slider->content!!}
+                        </div>
+                    </a>
+                </li>
+                @endforeach         
+               
+               
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="promotinbox layout4">
+                        <img src="{{url('/segade/img/h33.jpg')}}" alt="promotion"/>
+                        <div class="promotionbox-content">
+                            <h3>COLGANTE PLATA PRIMERA LEY(NUEVOS)</h3>
+                            <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- LAYER NR. 3 -->
-
-            </li>
-
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="promotinbox layout4">
+                        <img src="{{url('/segade/img/h33.jpg')}}" alt="promotion"/>
+                        <div class="promotionbox-content">
+                            <h3>Nuevos COLLARES</h3>
+                            <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                </div>
+                
         </ul> 
     </div><!-- END REVOLUTION SLIDER -->
 </div><!-- END OF SLIDER WRAPPER -->
@@ -88,6 +82,7 @@
                     </div>
                 </div>
             </div><!-- PromotionBox Layout3 /- -->
+           
 
             <!-- PromotionBox Layout4 -->
             <div class="col-md-6 col-sm-6 col-xs-6">
@@ -99,6 +94,7 @@
                     </div>
                 </div>
             </div><!-- PromotionBox Layout4 /- -->
+            
         </div>
     </div>
     <div class="padding-30"></div>  

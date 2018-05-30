@@ -41,7 +41,7 @@
 					<td>{{$product->user_phone}}</td>
 					<td><a target="_black" href="{{route('product',[$product->category,$product->slug])}}">{{$product->title}}</a></td>
 					<td>{{$product->price}}</td>
-					<td>${{ number_format($product->price,2) }} x {{ $product->quantity }} =
+					<td>€{{ number_format($product->price,2) }} x {{ $product->quantity }} =
 					{{ number_format($product->price*$product->quantity,2) }}</td>					
 					<td>{{$product->quantity}}</td>					
 					<td>{{$product->category}}</td>
