@@ -10,7 +10,7 @@ namespace App;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class SoCategory
+ * Class Category
  * 
  * @property int $id
  * @property string $category
@@ -29,7 +29,9 @@ class Category extends Eloquent
 	];
 
 	protected $fillable = [
-		'category',
+		'name',
+		'slug',
+		'img',
 		'activo'
 	];
 

@@ -8237,17 +8237,32 @@ td.status_proyecto span{
 }
 
 .slider_img_list{
-  max-width: 380px;
+  max-width: 200px;
   display: inline-block;
 }
 td.slider_img{
   text-align: center;
 }
+/*list slider dashboard*/
+td.slider_content{
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+/*td.slider_color span{
+    border: 1px #999 solid;
+    padding: 10px;
+    display: inline-block!important;
+}*/
 
+/*form create slider dashboard*/
+textarea#slider{
+  font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 /*section reserved*/
  .footable_btn .btn{
-
    margin-bottom: 0px!important;
-
 }
 

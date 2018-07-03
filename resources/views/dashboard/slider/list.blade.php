@@ -8,17 +8,23 @@
 	@include('dashboard.notificaciones.notificaciones')
 	<div class="ibox float-e-margins">                   
 		<div class="ibox-title text-right">
-            <a href="{{route('slider.create')}}"><b><i class="fa fa-plus"></i> Agregar Slider</b></a>
+			<h5>Sliders</h5>
+            <div class="ibox-tools">
+                <a style="color: #337ab7;" href="{{route('slider.create')}}"><b><i class="fa fa-plus"></i> Agregar Slider</b></a>
+            </div>
+            
         </div>
 		<div class="ibox-content">		
 			<table class="table datatable table-striped table-hover slider_table">
 				<thead>				
 				<tr>
 					<th>id</th>
-					<th>img</th>
-					<th>Titulo</th>
-					<th>Link</th>									
-					<th>status</th>
+					<th>Img</th>
+					<th>Titulo</th>					
+									
+					
+					<th>Tipo</th>									
+					<th>Status</th>
 					<th>Acciones</th>
 				</tr>
 				</thead>
@@ -28,24 +34,30 @@
 				<tr>
 					<td>{{$slider->id}}</td>
 					<td class="slider_img"><img src="{{$slider->img}}" class="img-responsive slider_img_list"></td>
-					<td>{{$slider->title}}</td>
-					<td><a target="_black" href="{{$slider->href}}">{{$slider->href}}</a></td>													
+					<td class="slider_content">{!!$slider->content!!}</td>
+					<!--<td class="slider_color" > <span class="label" style="background:{{$slider->text_color}}; "></span> </td>-->
+					<!--<td><a target="_black" href="{{$slider->href}}">{{$slider->href}}</a></td>-->
+					<td>
+						@if($slider->tipo)					
+						<span class="label label-success">Slider Grande</span>
+						@else
+						<span class="label label-warning">Slider Pequeño</span>
+						@endif
+					</td>												
 					<td>
 						@if($slider->activo)					
 						<span class="label label-primary">Publicada</span>
 						@else
-						<span class="label label-warning">Pausada</span>
+						<span class="label label-default">Pausada</span>
 						@endif
-					</td>
-					<td ><a href="{{$slider->description}}">{{$slider->description}}</a></td>					
-					
-					<td>
+					</td>					
+					<td>	
 						<div class="btn-group">							
 							
-							<a href="{{route('slider.edit',$slider->id)}}" class="btn-white btn btn-xs">
+							<a href="{{route('slider.edit',$slider->id)}}" class="btn-white btn btn-sm">
 								Editar
 							</a>							
-							<a id="{{route('slider.destroy',$slider->id)}}" class="btn-white btn btn-xs slider" data-toggle="modal" data-target="#modal_confirm{{$slider->id}}">Eliminar</a>
+							<a id="{{route('slider.destroy',$slider->id)}}" class="btn-white btn btn-sm slider" data-toggle="modal" data-target="#modal_confirm{{$slider->id}}">Eliminar</a>
 							
 							<div class="modal fade " id="modal_confirm{{$slider->id}}" tabindex="-1" role="dialog" aria-hidden="true">
 					            <div class="modal-dialog modal-sm" role="document">

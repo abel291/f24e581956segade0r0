@@ -45,7 +45,7 @@
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Abel Morales <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a href="">Perfil</a></li>
-                            <li><a href="">Apartados</a></li>
+                            <li><a href="">Reservados</a></li>
                             <li><a href="">Salir</a></li>                            
                         </ul>
                     </li>

@@ -22,7 +22,7 @@ class ReservedProduct extends Migration
             $table->string('slug', 120);
             $table->text('content');
             $table->decimal('price',12, 2)->default('0');
-            $table->integer('quantity');                   
+            $table->integer('quantity')->nullable();                   
             $table->string('img',120); 
             $table->string('category',55);            
             $table->boolean('activo')->default(1);

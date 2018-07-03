@@ -26,31 +26,38 @@ class ProductController extends Controller
     public function product($slug_ca,$slug_pro=null)
     { 
 
-        $products=product::
+        
+        $products=Product::
             orderBy('id','desc')
             ->join('categories', 'products.so_categories_id', '=', 'categories.id')
-            ->where('categories.slug',$slug_ca)            
-            ->where('products.activo',1)            
+            ->where('products.activo',1)          
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
                     'categories.name as category_name'                
             );
+        
+        $categories=$products;
+        $categories=$categories->get()->unique('category_name');
+
+        //dd($categories);
+        
         $economicos=$products;
-        $economicos=$economicos->get()->sortBy('price')->take(5);
+        $economicos=$economicos->where('categories.slug',$slug_ca)->get()->sortBy('price')->take(5);
         //list
         if (!$slug_pro) {    
-            $products=$products->paginate(9);
+            $products=$products->where('categories.slug',$slug_ca)->paginate(9);
             $products->search=$products->first()->category_name;
-            return view('products.list',compact('products','economicos'));            
+            return view('products.list',compact('products','economicos' ,'categories'));            
         
         //detail
         }else{
-            $products=$products->get();
-            $economicos=$products->sortBy('price')->take(5);            
+            $products=$products->where('categories.slug',$slug_ca)->inRandomOrder()->get();                        
             $product=$products->where('slug',$slug_pro)->first();
-            $products_related=$products->random(3);         
-            return view('products.detail',compact('product','products_related','economicos'));        
+            $economicos=$products->whereNotIn('slug', $slug_pro)->sortBy('price')->take(5);
+            $products_related=$products->whereNotIn('slug', $slug_pro)->take(3);
+                     
+            return view('products.detail',compact('product','products_related','economicos','categories'));        
         }     
 
         
@@ -60,20 +67,45 @@ class ProductController extends Controller
         //dd($request->search);
         $products=product::
             orderBy('id','desc')
-            ->join('categories', 'products.so_categories_id', '=', 'categories.id')
-            ->where('products.title','like',"%$request->search%")
+            ->join('categories', 'products.so_categories_id', '=', 'categories.id')            
             ->where('products.activo',1)          
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
                     'categories.name as category_name'                
             );
+
+        $categories=$products;
+        $categories=$categories->get()->unique('category_name');
+        
         $economicos=$products;
         $economicos=$economicos->get()->sortBy('price')->take(5);    
-        $products=$products->paginate(9);     
+        $products=$products->where(function($q) use ($request) {
+          $q->where('products.title','like',"%$request->search%")
+            ->orWhere('products.content','like',"%$request->search%");
+        })->paginate(9);      
         $products->search =' Búsqueda: '. $request->search;        
             
-        return view('products.list',compact('products','economicos')); 
+        return view('products.list',compact('products','economicos','categories')); 
+    }
+
+    public function novedades(){
+        
+        $products=Product::
+            orderBy('id','desc')
+            ->join('categories', 'products.so_categories_id', '=', 'categories.id')
+            ->where('products.activo',1)          
+            ->select('products.*','categories.slug as category_slug','categories.name as category_name');
+        
+        $categories=$products;
+        $categories=$categories->get()->unique('category_name');
+       
+        
+        $economicos=$products;
+        $economicos=$products->get()->sortBy('price')->take(5);
+        $products=$products->paginate(9);
+        $products->search="Novedades";
+        return view('products.list',compact('products','economicos' ,'categories'));  
     }
 
     

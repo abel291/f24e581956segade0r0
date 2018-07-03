@@ -16,20 +16,21 @@ class Pages extends Migration
         Schema::create('pages', function(Blueprint $table) {
             $table->engine = 'InnoDB';        
             $table->increments('id');
-            $table->string('phone', 120);
-            $table->string('address', 120);
-            $table->string('map', 120);
-            $table->string('email', 120);
-            $table->text('note');            
-            $table->string('slug', 40);
-            $table->text('entry');
-            $table->text('content');
-            $table->string('main_img', 140)->default(null);
-            $table->string('seo_title', 75)->default(null);
-            $table->string('seo_desc', 320)->default(null);
-            $table->string('seo_keys', 140)->default(null);
+            $table->string('title', 120)->nullable();
+            $table->string('phone', 120)->nullable();
+            $table->string('address', 120)->nullable();
+            $table->text('map')->nullable();
+            $table->string('email', 120)->nullable();
+            $table->text('note')->nullable();            
+            $table->string('slug', 120)->nullable();
+            $table->text('entry')->nullable();
+            $table->text('content')->nullable();
+            $table->string('main_img', 140)->nullable();
+            $table->string('seo_title', 75)->nullable();
+            $table->string('seo_desc', 320)->nullable();
+            $table->string('seo_keys', 140)->nullable();
             $table->boolean('activo')->default(1);
-            $table->timestamp('date_modify')->default(\DB::raw('CURRENT_TIMESTAMP'));        
+            $table->timestamps();      
                   
         });
 

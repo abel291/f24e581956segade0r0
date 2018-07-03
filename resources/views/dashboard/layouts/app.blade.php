@@ -24,9 +24,10 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
+
                         <div class="dropdown profile-element">                           
                             <span class="clear"> <span class="block m-t-xs"> 
-                                <strong class="font-bold">{{auth()->user()->name}}</strong>
+                                <strong class="font-bold" style="color: white;">{{auth()->user()->name}}</strong>
                             </span> 
                             <span class="text-muted text-xs block">{{auth()->user()->email}} </span> 
                             
@@ -43,19 +44,34 @@
                         <a href="{{url('/dashboard/slider')}}"><i class="fa fa-file-image-o"></i> <span class="nav-label">Slider</span></a>
                     </li>
                     <li class="{{ Request::is('dashboard/productos*') ? 'active' : '' }}">
-                        <a href="{{url('/dashboard/productos')}}"><i class="fa fa-folder-open"></i> <span class="nav-label">Productos</span></a>
+                        <a href="{{url('/dashboard/productos')}}"><i class="fa fa-bullseye"></i> <span class="nav-label">Productos</span></a>
                     </li>
-                    <li class="{{ Request::is('dashboard/apartados') ? 'active' : '' }}">
-                        <a href="{{url('dashboard/apartados')}}"><i class="fa fa-archive"></i> <span class="nav-label">Ordenes</span></a>
+                    <li class="{{ Request::is('dashboard/categorias') ? 'active' : '' }}">
+                        <a href="{{url('dashboard/categorias')}}"><i class="fa fa-tags"></i> <span class="nav-label">Categorias</span></a>
+                    </li>
+                    <li class="{{ Request::is('dashboard/reservados') ? 'active' : '' }}">
+                        <a href="{{url('dashboard/reservados')}}"><i class="fa fa-list-alt"></i> <span class="nav-label">Ordenes</span></a>
+                    </li>
+                    <li class="{{ Request::is('dashboard/blog') ? 'active' : '' }}">
+                        <a href="{{url('dashboard/blog')}}"><i class="fa fa-book"></i> <span class="nav-label">Blog</span></a>
+                    </li> 
+                    <li class="{{ Request::is('dashboard/page') ? 'active' : '' }}">
+                        <a href="{{url('dashboard/page')}}"><i class="fa fa-file-o"></i> <span class="nav-label">Contenido</span></a>
                     </li>             
                     
                 </ul>
             </div>
         </nav>
+
         <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom">
+            <div class="row border-bottom">                
                 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>                    
+                    </div>
                     <ul class="nav navbar-top-links navbar-right">
+                        <a target="_blanck" href="{{route('home')}}" class="2 btn btn-primary">Volver a la web</a>
+                        
                         <li>
                             <a href="{{route('logout')}}">
                                 <i class="fa fa-sign-out"></i> Salir
@@ -64,7 +80,7 @@
                     </ul>
                 </nav>
             </div>
-
+            
             <div class="wrapper wrapper-content">
                 
                
@@ -74,7 +90,7 @@
                 <div class="row">       
                     <div class="footer">                        
                         <div>
-                            <strong>Copyright</strong> Example Company &copy; 2018
+                            <strong>Copyright</strong> rocketfy {{date('Y')}}
                         </div>
                     </div>
                 </div>
@@ -122,8 +138,13 @@
     <!-- Scripts -->
     <script src="{{ asset('assets/js/jquery-2.1.1.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>   
+    <script src="{{ asset('assets/js/inspinia.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script> 
+    <script src="{{ asset('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+     
+    
+    
     <script type="text/javascript">
         $(document).on('submit ', 'form', function(event) {
             $('form button[type="submit"],form input[type="submit"]').attr('disabled',true);                          

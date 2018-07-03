@@ -8,16 +8,20 @@
 	@include('dashboard.notificaciones.notificaciones')
 	<div class="ibox float-e-margins">                   
 		<div class="ibox-title text-right">
-            <a href="{{route('productos.create')}}" class=""><b> <i class="fa fa-plus"></i> Agregar Producto</b></a>
+			<h5>Productos</h5>
+            <div class="ibox-tools">
+                <a style="color: #337ab7;" href="{{route('productos.create')}}" class=""><b> <i class="fa fa-plus"></i> Agregar Producto</b></a>
+            </div>
+            
         </div>
 		<div class="ibox-content">		
 			<table class="table datatable table-striped table-hover">
 				<thead>				
 				<tr>
 					<th>id</th>
-					<th>Nombre</th>
+					<th>Img</th>
+					<th>Nombre</th>					
 					<th>Precio</th>
-					<th>Cantidad disponible</th>
 					<th>Categoria</th>
 					<th>status</th>
 					<th>Acciones</th>
@@ -28,9 +32,10 @@
 
 				<tr>
 					<td>{{$product->id}}</td>
+					<td class="slider_img"><img src="{{$product->img}}" class="img-responsive slider_img_list"></td>					
 					<td>{{$product->title}}</td>
-					<td>€{{ number_format($product->price,2) }}</td>					
-					<td>{{$product->quantity}}</td>					
+					<td>{{number_format($product->price,2)}}€ </td>					
+							
 					<td>{{$product->category->name}}</td>
 					<td class="status_proyecto">
 						@if($product->activo)					

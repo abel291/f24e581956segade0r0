@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title',$products->search )
+
+@section('seo_desc',$products->search )
+@section('seo_keys',$products->search )
+
 @section('content')
 <div class="section pt-5 pb-10">
     <div class="container">
@@ -16,8 +20,8 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                @if( \Route::current()->getName() === 'search') )
-                <div class="commerce-result-count">{{$products->total()}} resultados encontrados</div>
+                @if( \Route::current()->getName() === 'search') 
+                <div class="commerce-result-count">{{$products->total()}} productos encontrados</div>
                 @endif
                 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ReservedProduct;
 use App\Slider;
+use App\Category;
 use App\Product;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -15,10 +16,14 @@ class HomeController extends Controller
      *
      * @return void
      */
-    /*public function __construct()
+    public function __construct()
     {
-        $this->middleware('auth');
-    }*/
+        $this->categories=Category::
+          where('products.activo',1)          
+          ->join('products', 'categories.id','=','products.so_categories_id')                       
+          ->select('categories.*','categories.slug as category_slug','categories.name as category_name')
+          ->get()->unique('category_name');     
+    }
 
     /**
      * Show the application dashboard.
@@ -27,41 +32,40 @@ class HomeController extends Controller
      */
     public function index()
     {   
-
         
-        
-
-        //$products=Product::inRandomOrder()->paginate(6);
-        $sliders=Slider::get();
+        $sliders=Slider::where('activo',1)->orderBy('updated_at','desc')->get();
         $products=product::
-            orderBy('id','desc')
-            ->join('categories', 'products.so_categories_id', '=', 'categories.id')
-                       
+            where('products.activo',1)
+            ->orderBy('products.id','desc')
+            ->join('categories', 'products.so_categories_id', '=', 'categories.id')                       
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
                     'categories.name as category_name'                
-        )->get(); 
+        )->get();
+
+        
+        $categories=$this->categories;
+
         //$products=Product::orderBy('id','desc')->get();
-        $random=$products->random(6);
-        $recientes=$products->take(10);
+        $random=$products->sortByDesc('id')->take(6);
+        $recientes=$products->sortByDesc('id')->take(10);
         $economicos=$products->sortBy('price')->take(10);
         //dd($mas_apartados->random(1));     
 
-        return view('home.index',compact('random','','recientes','economicos','sliders'));
+        return view('home.index',compact('random','','recientes','economicos','sliders','categories'));
     }
     public function categories($categories=null)
-    {
-        if (!$categories) {
-            return view('home.categories');
-            
-        }
+    {     
+        $categories=$this->categories;
+        return view('home.categories',compact('categories'));        
     }
+
     public function contacts()
-    {
-        
-            return view('home.contacts');
-            
-        
+    {    
+        $categories=$this->categories;
+        return view('home.contacts',compact('categories'));        
     }
+
+  
 }

@@ -11,22 +11,15 @@
             <div class="heading-line"></div>
         </div>
     </div>
-    <div class="section">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 p-0">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5920.707926742606!2d1.8418948279030358!3d42.09988947738429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a508312251967d%3A0xc8dac010a7b1e524!2s08600+Berga%2C+Barcelona%2C+Espa%C3%B1a!5e0!3m2!1ses!2sve!4v1527567586046"  frameborder="0" style="border:0;width: 100%;height: 500px;" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>  
+    
     
     
     <div class="section pt-6 pb-6">
         <div class="container">
             <div class="row">
                 <div data-wow-delay="0.3s" class="col-md-9 wow fadeInLeft" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
-                    <h3 class="dark-color fw-600 os-font bottom-line">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199.92016501671463!2d-4.438837860868966!3d36.70520235595217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f778aa653ccd%3A0x815baf6ef0578361!2zQ2FsbGUgSMOpcm9lIGRlIFNvc3RvYSwgOTEsIDI5MDAyIE3DoWxhZ2EsIEVzcGHDsWE!5e0!3m2!1ses-419!2sve!4v1527662959479"  frameborder="0" style="border:0;width: 100%;height: 500px;" allowfullscreen></iframe>
+                    <!--<h3 class="dark-color fw-600 os-font bottom-line">
                         ¿TIENES ALGUNA DUDA?
                     </h3>
                     
@@ -52,34 +45,59 @@
                                 <button type="button" class="btn btn-color uppercase">Enviar Mensaje</button>
                             </div>
                         </div>
-                    </form>
+                    </form>-->
                 </div>
                 <div data-wow-delay="0.3s" class="col-md-3 wow fadeInRight" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInRight;">
                     <div id="sidebar">
                         <h3 class="dark-color fw-600 os-font bottom-line">
                             Segade oro
-                        </h3>
-                        <p class="mb-4">
-                            On the flanks it is cased with wood, and at top completely covered by him. We started having real fun the next day.
-                        </p>
+                        </h3>                        
                         <div class="company-info mb-2">
                             <h4 class="fw-600 dark-color os-font"> Dirección </h4>
-                            <p class="dark-color">
-                                 Dirección
-                                <br> 5690-970 New york City
+                            <p class="dark-color" style="padding-right: 10px;">
+                                  C/ Héroe de Sostoa, 91 CP 29002 Málaga <br>
                             </p>
                             <div class="simple_line"></div>
                             <h4 class="fw-600 dark-color os-font">Horario de atención</h4>
                             <p class="dark-color">
-                                LUNES - VIERNES : 08:00am - 05:30pm
-                                <br> 5690-970 New york City
+                                <table style="width: auto;">
+                                    <tr>
+                                        <td> <b>Lunes</b></td>
+                                        <td>9:30–14:00 - 17:00–20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Martes</b></td>
+                                        <td>9:30–14:00 - 17:00–20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Miércoles</b></td>
+                                        <td>9:30–14:00 - 17:00–20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Jueves</b></td>
+                                        <td>9:30–14:00 - 17:00–20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Viernes</b></td>
+                                        <td>9:30–14:00 - 17:00–20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Sábado</b></td>
+                                        <td>10:00 14:00</td>                                        
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Domingo</b></td>
+                                        <td>Cerrado</td>                                        
+                                    </tr>
+                                </table>
+                                
+                                
                             </p>
                             <div class="simple_line"></div>
                             <a href="mailto:email@fount.com" class="color">
-                                segadeoro@segade.com
+                                hola@segadeoro.com
                             </a>
-                            <p class="phone">+1 (245) 785 952 354</p>
-                            <p class="phone">+1 (245) 785 952 355</p>
+                            <p class="phone">+34 951 112 626</p>                            
                         </div>
                     </div>
                 </div>

@@ -43,19 +43,21 @@ class SliderController extends Controller
     public function store(Request $request,Slider $slider)
     {
         $v = Validator::make($request->all(), [            
-            'title'=>'required',
             'content'=>'required',            
-            'href'=>'required',          
+            'tipo'=>'required',            
+            'href'=>'required',                   
             'img' => ' required|image|mimes:jpeg,jpg,png|max:10000',            
         ]);
  
         if ($v->fails())
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
-        }
+        }       
+       
         $files=$request->file('img');
         $slider=$slider->fill($request->all());
-        $slider->img=$this->upload_img($files,$slider->title);
+        $slider->content=nl2br($request->content);
+        $slider->img=$this->upload_img($files,$request->content);
         $slider->save();
 
         return redirect()->route('slider.index')
@@ -83,7 +85,7 @@ class SliderController extends Controller
     public function edit($id)
     {
         $slider=Slider::find($id);
-        $edit=true;
+        $edit=true;        
         return view('dashboard.slider.create',compact('edit','slider'));
     }
 
@@ -96,8 +98,9 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $v = Validator::make($request->all(), [            
-            'title'=>'required',
+        
+        $v = Validator::make($request->all(), [           
+            
             'content'=>'required',            
             'href'=>'required',          
             'img' => 'nullable|image|mimes:jpeg,jpg,png|max:10000',            
@@ -108,17 +111,31 @@ class SliderController extends Controller
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
         
-        
-        $slider=Slider::find($id);
-        $slider->title=$request->title;
-        $slider->content=$request->content;
-        $slider->href=$request->href;        
-        $slider->tipo=$request->tipo;        
-         if ($request->hasFile('img')){
+                 
+        $slider=Slider::find($id);       
+        $slider->content=nl2br($request->content);
+        $slider->href=$request->href; 
+        $slider->activo=$request->activo;           
+        $slider->tipo=$request->tipo;
+        $slider->text_color=$request->text_color;       
+        if ($request->hasFile('img')){
             $files=$request->file('img');
             $slider->img=$this->upload_img($files,$slider->title);
         }        
         $slider->save();
+
+        if ($slider->tipo==0 && $slider->activo==1) {
+            $sliders=Slider::where('tipo',0)->where('activo',1)->get();
+            //dd($sliders->sortBy('updated_at'));
+            if ($sliders->count()>2) {
+                $slider_desactive=$sliders->sortByDesc('updated_at')->last();
+                //dd($slider_desactive);
+                $slider_desactive->activo=0;
+                $slider_desactive->save();
+               
+            }
+            
+        }
 
         return redirect()->route('slider.index')
             ->withSuccess('Datos guardados con exito');  
@@ -132,15 +149,42 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        $product=Slider::findOrFail($id);
-        $product->delete();
+        $slider=Slider::findOrFail($id);
+        $slider->delete();
         return redirect()->route('slider.index')
             ->withSuccess('Slider eliminado con exito');
     }
-    public function upload_img($files,$title)
+    public function upload_img($file,$title)
     {
                   
-        $img=\Image::make($files)->stream('jpg');                
+        if ($file->getClientSize()>100000) {
+
+            $temppath=$file->getPathname();
+            $type='.'.$file->getClientOriginalExtension();                   
+            $filename='/tmp/'.uniqid(5)."_".str_slug($title).$type;       
+
+            list($ancho, $largo) = getimagesize($temppath);           
+
+            $nuevo_largo = (1200 * $largo) / $ancho;
+
+            switch ( $type ){    
+                case ".jpg":
+                case ".jpeg":
+                $imagen = imagecreatefromjpeg( $temppath );              
+                break;
+                case ".png":
+                $imagen = imagecreatefrompng( $temppath );
+                break;
+            }
+            $lienzo = imagecreatetruecolor(1200,$nuevo_largo );           
+            imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, 1200,$nuevo_largo , $ancho, $largo);
+            imagejpeg( $lienzo, $filename,80);
+
+            $file=$filename;
+                    
+        }
+
+        $img=\Image::make($file)->stream('jpg');                
         $filename='segadeoro/img/'.uniqid(5)."_".str_slug($title).'.jpg';     
         //$filename='segadeoro/img/segadeoro_dd.jpg';    
         Storage::put($filename,$img->__toString(),'public');                           

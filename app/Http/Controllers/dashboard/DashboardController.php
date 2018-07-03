@@ -15,10 +15,22 @@ class DashboardController extends Controller
     }
     public function index($value='')
     {	
-    	$products=Product::get();
+    	$products=Product::
+        join('categories', 'products.so_categories_id', '=', 'categories.id')
+        ->select('products.*',
+            'categories.slug as category_slug',
+            'categories.name as category_name',         
+            'categories.color'           
+        )->get();
     	$users=User::get();
     	$reserved=ReservedProduct::get();
+        
+        $chart=$products->groupBy('so_categories_id')->map(function ($item, $key) {
+            return [$item->first()->category_name,count($item),$item->first()->color];
+        });
 
-    	return view('dashboard.index',compact('products','users','reserved'));
+       
+
+    	return view('dashboard.index',compact('products','users','reserved','chart'));
     }
 }

@@ -28,17 +28,23 @@ Route::group(['prefix' => 'dashboard','middleware' => 'admin'], function() {
 	
 	Route::get('/img/{id}/delete', 'dashboard\ProductController@delete_img')->name('delete_img');
 
-	Route::get('/apartados', 'dashboard\ReservedController@reserved')->name('d_reserved');
+	Route::get('/reservados', 'dashboard\ReservedController@reserved')->name('d_reserved');
 
-	Route::get('/apartados/status', 'dashboard\ReservedController@status')->name('status');
+	Route::get('/reservados/status', 'dashboard\ReservedController@status')->name('status');
 	
-	Route::get('/apartados/{reserved}/{status}/status', 'dashboard\ReservedController@status')->name('statu_reserved');
+	Route::get('/reservados/{reserved}/{status}/status', 'dashboard\ReservedController@status')->name('statu_reserved');
 
 	Route::resource('/usuarios', 'dashboard\UserController');
 
+	Route::resource('/blog', 'dashboard\BlogController');
+
+	Route::resource('/page', 'dashboard\PageController');
+
+	Route::resource('/categorias', 'dashboard\CategoryController');
+
+	Route::get('/page/{id}/remove_image', 'dashboard\PageController@remove_image')->name('page.remove_image');
 
 	//Route::post('/reserved', 'dashboard\ReservedController@status');
-
     
 });
 
@@ -46,7 +52,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/categorias', 'HomeController@categories')->name('categories');
 
-Route::get('/contactos', 'HomeController@contacts')->name('contactos');
+Route::get('/contacto', 'HomeController@contacts')->name('contactos');
+
+Route::get('/page/{slug}', 'PageController@index')->name('page');
 
 Route::get('/cesta', 'ReservedController@reserved')->name('reserved')->middleware('auth');
 
@@ -62,6 +70,14 @@ Route::get('/historial', 'ReservedController@history')->name('history')->middlew
 
 Route::get('/busqueda', 'ProductController@search')->name('search');
 
+Route::get('/blog', 'BlogController@index')->name('blog');
+
+Route::get('/blog/{categoria}/{slug?}/', 'BlogController@entradas')->name('entradas');
+
+Route::get('/novedades', 'ProductController@novedades')->name('novedades');
+
 Route::get('/{categoria}/{slug?}/', 'ProductController@product')->name('product');
+
+
 
 

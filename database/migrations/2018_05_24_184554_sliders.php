@@ -17,10 +17,11 @@ class Sliders extends Migration
             $table->engine = 'InnoDB';
         
             $table->increments('id');
-            $table->string('title', 120);
+            //$table->string('title', 120);
             $table->string('img', 150);
             $table->boolean('tipo')->default(0);
             $table->text('content')->nullable();
+            $table->string('text_color',10)->default('#fff');
             $table->string('href', 100)->nullable();           
             $table->boolean('activo');
             $table->timestamps();       

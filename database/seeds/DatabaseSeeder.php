@@ -15,12 +15,9 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;'); 
         $this->call(user::class);  	
         factory('App\User', 50)->create(); 
-        factory('App\Product', 200)->create();        
+        factory('App\Product', 2)->create();        
+        factory('App\Blog', 5)->create();        
         $this->call(categoria::class);
-        
-
-
-
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');        	
        
     }

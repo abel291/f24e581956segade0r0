@@ -23,10 +23,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
- * @property \App\Models\SoProduct $so_product
- * @property \App\Models\SoUser $so_user
+ * @property \App\Product $so_product
+ * @property \App\User $so_user
  *
- * @package App\Models
+ * @package App
  */
 class ReservedProduct extends Eloquent
 {
@@ -51,14 +51,11 @@ class ReservedProduct extends Eloquent
 
 	public function user()
 	{
-		return $this->belongsTo(\App\Models\User::class, 'so_users_id');
+		return $this->belongsTo(\App\User::class, 'so_users_id');
 	}
 	public function product()
 	{
-		return $this->belongsTo(\App\Models\User::class, 'so_products_id');
+		return $this->belongsTo(\App\Product::class, 'so_products_id');
 	}	
-	public function category()
-	{
-		return $this->belongsTo(\App\Category::class, 'so_categories_id');
-	}
+	
 }

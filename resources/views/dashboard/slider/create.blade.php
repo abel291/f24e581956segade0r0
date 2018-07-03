@@ -30,26 +30,24 @@
 </div>
                
 @endsection
-@section('css')
-	<link href="{{asset('assets/css/plugins/summernote/summernote.css') }}" rel="stylesheet">
-    <link href="{{asset('assets/css/plugins/summernote/summernote-bs3.css') }}" rel="stylesheet">
 
-    <style type="text/css">
-    
-    </style>
+@section('css')
+
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/colorpicker/css/bootstrap-colorpicker.css') }}">
+
 @endsection
+
+
 @section('js')
-<script src="{{ asset('assets/js/plugins/summernote/summernote.min.js') }}"></script>
+<script src="{{ asset('assets/colorpicker/js/bootstrap-colorpicker.js') }}"></script>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
+        $('.text_color').colorpicker({
+		    format:"hex",
+		  });
 
-        $('#summernote').summernote();
-        var postForm = function() {
-			var content = $('textarea[name="descripcion"]').html($('#summernote').code());
-		}
-
-        $('.note-insert').remove();
         $(document).on('click', '.agregar_imagen', function(event) {
 			event.preventDefault();
 			console.log('on')
@@ -94,9 +92,9 @@
 		   		
 		   		url=$(this).attr('id');
 		   		$('.modal .modal-title').text('Borrar Imagen')
-		   		$('.modal .modal-body').text('Desea Borrar la iamgen?')
+		   		$('.modal .modal-body').text('Desea Borrar la imagen?')
 		   		$('.modal .modal-footer .btn')
-		   		.text('Borrar Imagen0 ')
+		   		.text('Borrar Imagen')
 		   		.attr('href', url)
 		   		.removeClass('btn-success')
 		   		.addClass('btn-danger');	   

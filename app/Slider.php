@@ -33,6 +33,7 @@ class Slider extends Eloquent
 		'title',
 		'img',
 		'content',
+		'text_color',
 		'href',
 		'activo'		
 	];

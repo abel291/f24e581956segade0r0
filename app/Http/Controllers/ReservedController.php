@@ -8,31 +8,35 @@ use App\Category;
 use App\ReservedProduct ;
 class ReservedController extends Controller
 {
+    public function __construct()
+    {
+        $this->categories=Category::
+          where('products.activo',1)          
+          ->join('products', 'categories.id','=','products.so_categories_id')                       
+          ->select('categories.slug as category_slug','categories.name as category_name')
+          ->get()->unique('category_name');     
+    }
+
     public function add(Request $request)
     {
        
-        $product=Product::find($request->so_products_id);
-
-        if ($product->quantity_min>$request->quantity) {
-        	return redirect()->back()->withErrors('La cantida minima de este producto es de '.$product->quantity_min);
-        }
+        $product=Product::find($request->so_products_id);       
         
         $reserved=(new ReservedProduct)->fill($product->toArray());        
         $reserved=$reserved->fill($request->all());   
         $reserved->category=$product->category->name; 
         $reserved->user()->associate(auth()->user()->id);
         $reserved->save();
-        
         return redirect()->route('reserved');
        
     }
     public function reserved()
     { 
         $user_id=auth()->user()->id;
-        $reserved_products=auth()->user()->reserved_products->where('status',0);
-        
-        //dd($reserved_products->first());
-        return view('reserved.list',compact('reserved_products'));
+        $reserved_products=auth()->user()->reserved_products->where('status',0);       
+
+        $categories=$this->categories;
+        return view('reserved.list',compact('categories','reserved_products'));
     }
 
     public function remove($id=null)
@@ -47,23 +51,25 @@ class ReservedController extends Controller
         $user_id=auth()->user()->id;
         $reserved_products=auth()->user()->reserved_products->where('status',0);
 
-        $total=$reserved_products->sum(function ($product) {
-		    return $product->price*$product->quantity;
-		});
+        $total=$reserved_products->sum('price');
         
         //dd($total);
         //dd($reserved_products);
-        return view('reserved.checkout',compact('reserved_products','total'));
+
+        $categories=$this->categories;
+        return view('reserved.checkout',compact('categories','reserved_products','total'));
     }
      public function store(Request $request)
      {
      	$reserved_products=ReservedProduct::where('so_users_id',auth()->user()->id)->where('status',0)
      	->update([
      		'status' => 1,
-     		'date_arrival' => $request->date_arrival,
-            'hour' => $request->hour,      
+     		//'date_arrival' => $request->date_arrival,
+            //'hour' => $request->hour,      
      		'note' => $request->note  		
      	]);
+
+        $categories=$this->categories;
      	return redirect()->route('history');
         
      }
@@ -72,7 +78,7 @@ class ReservedController extends Controller
      	$user_id=auth()->user()->id;
         $reserved_products=auth()->user()->reserved_products;
 
-        return view('reserved.history',compact('reserved_products'));
-
+        $categories=$this->categories;
+        return view('reserved.history',compact('categories','reserved_products'));
      }
 }

@@ -23,7 +23,7 @@ class Relaciones extends Migration
         {
             
             $table->foreign('so_products_id')->references('id')->on('products');         
-            $table->foreign('so_users_id')->references('id')->on('users');         
+            $table->foreign('so_users_id')->references('id')->on('users')->onDelete('cascade');;         
         });
 
         Schema::table('products', function(Blueprint $table)

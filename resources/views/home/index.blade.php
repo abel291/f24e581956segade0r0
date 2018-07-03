@@ -7,11 +7,11 @@
     <div class="rev_slider_wrapper">
         <div id="shop-slider1" class="rev_slider" data-version="5.0">
             <ul>
-                @foreach($sliders as $slider)
+                @foreach($sliders->where('tipo',1) as $slider)
                 <li data-transition="fade"> 
                     <a href="{{$slider->href}}">
                         <!-- MAIN IMAGE -->
-                        <img src="{{$slider->img}}"  alt="shop"  width="1170" height="587"> 
+                        <img src="{{$slider->img}}"  alt="Joyas de segunda mano en Málaga" title="Joyas de segunda mano en Málaga"  style="width: 100%;" > 
                         <!-- LAYER NR. 1 -->
 
 
@@ -34,36 +34,16 @@
                             data-splitin="none" 
                             data-splitout="none"                            
                             data-responsive_offset="on" 
-                            style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat', sans-serif; ">{!!$slider->content!!}
+                            style="z-index: 6; font-weight:700;text-transform:uppercase;font-family: 'Montserrat',
+                             sans-serif; color:{{$slider->text_color}};">{!!$slider->content!!}
                         </div>
                     </a>
                 </li>
-                @endforeach         
-               
-               
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="promotinbox layout4">
-                        <img src="{{url('/segade/img/h33.jpg')}}" alt="promotion"/>
-                        <div class="promotionbox-content">
-                            <h3>COLGANTE PLATA PRIMERA LEY(NUEVOS)</h3>
-                            <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="promotinbox layout4">
-                        <img src="{{url('/segade/img/h33.jpg')}}" alt="promotion"/>
-                        <div class="promotionbox-content">
-                            <h3>Nuevos COLLARES</h3>
-                            <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach    
                 
-        </ul> 
-    </div><!-- END REVOLUTION SLIDER -->
-</div><!-- END OF SLIDER WRAPPER -->
+            </ul> 
+        </div><!-- END REVOLUTION SLIDER -->
+    </div><!-- END OF SLIDER WRAPPER -->
 </div><!-- Slider Section -->
 
 
@@ -72,29 +52,17 @@
     <div class="padding-30"></div>
     <div class="container">
         <div class="row">
-            <!-- PromotionBox Layout3 -->
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="promotinbox layout4">
-                    <img src="{{url('/segade/img/h33.jpg')}}" alt="promotion"/>
-                    <div class="promotionbox-content">
-                        <h3>COLGANTE PLATA PRIMERA LEY(NUEVOS)</h3>
-                        <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
+            @foreach($sliders->where('tipo',0) as $slider)
+                <div class="col-sm-6 ">
+                    <div class="promotinbox layout4">
+                        <img src="{{$slider->img}}" alt="Compro Oro en Málaga" title="Compro Oro en Málaga" style="width: 100%;" />
+                        <div class="promotionbox-content">
+                            <h3 style="color:{{$slider->text_color}}">{!!$slider->content!!}</h3>
+                            <a href="{{$slider->href}}" title="Ver mas">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
+                        </div>
                     </div>
                 </div>
-            </div><!-- PromotionBox Layout3 /- -->
-           
-
-            <!-- PromotionBox Layout4 -->
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="promotinbox layout4">
-                    <img src="{{url('/segade/img/h44.jpg')}}" alt="promotion"/>
-                    <div class="promotionbox-content">
-                        <h3>10% desceunto en anillos di sento</h3>
-                        <a href="#" title="Shop Now">Ver mas<span class="arrow_right" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div><!-- PromotionBox Layout4 /- -->
-            
+                @endforeach   
         </div>
     </div>
     <div class="padding-30"></div>  
@@ -105,10 +73,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div data-wow-delay="0.3s" class="text-center mb-5 wow fadeInUp" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                     <i class="mdi-bing icon-title"></i>
-                    <h2 class="fw-bolder os-font  mb-1 section-title">Productos Recientes</h2>
-                    <p>
-                        The stones under my feet were muddy and slippery. People were landing hastily on both sides of the river. The splashes of the people in the boats leaping into the river sounded like thunderclaps in my ears.
-                    </p>
+                    <h2 class="fw-bolder os-font  mb-1 section-title">Últimos productos</h2>
+                    
                 </div>
             </div>
         </div>
@@ -131,7 +97,7 @@
             <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                 <div class="text-center mb-2">
                     <div class="os-font double_lined">
-                        <h4 class="fw-normal ">Recien Agregados</h4>
+                        <h4 class="fw-normal ">Novedades</h4>
                     </div>
                 </div>
                 <div class="col-md-6">

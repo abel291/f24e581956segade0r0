@@ -14,6 +14,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
     /**
      * Display a listing of the resource.
@@ -47,13 +48,17 @@ class ProductController extends Controller
     public function store(Request $request,Product $producto)
     {
         $v = Validator::make($request->all(), [            
-            'title'         =>'required|unique:products',
-            'content'       =>'required',
-            'price'         =>'required|min:0',
-            'quantity'      =>'required|min:0',            
-            'quantity_min'  =>'required|min:0',
-            'images'        =>'required',
-            'images.*'      => 'image|mimes:jpeg,jpg,png|max:1000',            
+            'title'             =>'required',
+            'content'           =>'required',
+            'price'             =>'required|min:0',
+            'seo_title'         =>'nullable|max:75',
+            'seo_desc'          =>'nullable|max:320',
+            'seo_keys'          =>'nullable|max:140',
+            'so_categories_id'  =>'required',
+            //'quantity'        =>'required|min:0',            
+            //'quantity_min'    =>'required|min:0',
+            'images'            =>'required',
+            'images.*'          => 'image|mimes:jpeg,jpg,png|max:10000',            
         ]);
  
         if ($v->fails())
@@ -63,12 +68,14 @@ class ProductController extends Controller
 
         $files=$request->file('images');
         $product= (new Product)->fill($request->all());
-        $product->slug=str_slug($request->title);        
-        $product->img="-";      
-        $product->save();
-        $product->img=$this->upload_img($files,$product->slug,$product); 
-        $product->save();    
         
+        $product->seo_title=!$product->seo_title ? $product->title:$product->seo_title;   
+        
+        $product->save(); 
+        $product->img=$this->upload_img($files,$request->title,$product);   
+        $product->slug=str_slug($product->id.'-'.$request->title); 
+        $product->save();
+
         return redirect()->route('productos.index')
             ->withSuccess('Datos guardados con exito'); 
         
@@ -108,29 +115,38 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $v = Validator::make($request->all(), [            
             'title'=>'required',
             'content'=>'required',
             'price'=>'required|min:0',
-            'quantity'=>'required|min:0',            
-            'quantity_min'=>'required|min:0',
-            'images.*' => ' image|mimes:jpeg,jpg,png|max:1000',            
+            'seo_title'       =>'nullable|max:75',
+            'seo_desc'       =>'nullable|max:320',
+            'seo_keys'       =>'nullable|max:140',
+            'so_categories_id'  =>'required',
+            //'quantity'=>'required|min:0',            
+            //'quantity_min'=>'required|min:0',
+            'images.*' => ' image|mimes:jpeg,jpg,png|max:10000',            
         ]);
  
         if ($v->fails())
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
-
         
         $product= Product::find($id)->fill($request->all());
-        $product->slug=str_slug($request->title);        
-        $product->img=$request->img_activo;     
+        $product->slug=$product->id.'-'.str_slug($request->title);        
+        $product->img=$request->img_activo;  
+        $product->seo_title=!$product->seo_title ? $product->title:$product->seo_title;    
         $product->save();
 
-        $files=$request->file('images');
-        $this->upload_img($files,$product->slug,$product);      
+
         
+            
+        //dd($filename);
+        $files=$request->file('images');
+        $this->upload_img($files,$product->title,$product);      
+       
         return redirect()->route('productos.index')
             ->withSuccess('Datos guardados con exito');         
 
@@ -146,6 +162,7 @@ class ProductController extends Controller
     {
         $product=Product::findOrFail($id);
         $product->deleted_at=date('Y-m-d H:i:s');
+        $product->activo=0;
         $product->save();
         return redirect()->route('productos.index')
             ->withSuccess('Producto eliminado con exito');
@@ -159,17 +176,47 @@ class ProductController extends Controller
     }
 
     public function upload_img($files,$title,$product)
-    {
+    {   
+
         if ($files){           
             foreach ($files as $value) {
 
-                $img_normal=\Image::make($value)->stream('jpg',60); 
-                $img_thum=\Image::make($value)->resize(365,260)->stream('jpg',60);
-                $filename_normal='segadeoro/img/'.uniqid(5)."_".str_slug($request->title).'.jpg';     
-                $filename_thum='segadeoro/thum/'.uniqid(5)."_".str_slug($request->title).'.jpg';     
-                //$filename_normal='segadeoro/img/segadeoro_dd.jpg';    
-                //$filename_thum='segadeoro/thum/segadeoro_dd.jpg';    
+                if ($value->getClientSize()>100000) {
+                    
+                    $temppath=$value->getPathname();
+                    $type='.'.$value->getClientOriginalExtension();                   
+                    $filename='/tmp/'.uniqid(5)."_".str_slug($title).$type;       
+
+                    list($ancho, $largo) = getimagesize($temppath);           
+                    
+                    $nuevo_largo = (1200 * $largo) / $ancho;
+                    
+
+                    switch ( $type ){    
+                        case ".jpg":
+                        case ".jpeg":
+                        $imagen = imagecreatefromjpeg( $temppath );              
+                        break;
+                        case ".png":
+                        $imagen = imagecreatefrompng( $temppath );
+                        break;
+                    }
+                    $lienzo = imagecreatetruecolor(1200,$nuevo_largo );           
+                    imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, 1200,$nuevo_largo , $ancho, $largo);
+                    imagejpeg( $lienzo, $filename,80);
+
+                    $value=$filename;
+                    //dd($value);
+                }             
                 
+                $img_thum=\Image::make($value)->resize(365,260)->stream('jpg',60);
+                $img_normal=\Image::make($value)->stream('jpg',60);
+                
+                $filename_normal='segadeoro/img/'.uniqid(5)."_".str_slug($title).'.jpg';    
+                $filename_thum='segadeoro/thum/'.uniqid(5)."_".str_slug($title).'.jpg';      
+                
+                //dd($value);
+
                 Storage::put($filename_normal,$img_normal->__toString(),'public');                           
                 Storage::put($filename_thum,$img_thum->__toString(),'public');
                 
@@ -180,7 +227,7 @@ class ProductController extends Controller
                 $image->thum=$filename_thum;
                 $image->product()->associate($product);
                 $image->save();   
-                                       
+
             }
             return $filename_thum;
         }

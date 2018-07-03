@@ -1,35 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><!--<![endif]-->
 <head>
     <meta charset="utf-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- CSRF Token -->
+    
+    <meta name="keywords" content="@yield('seo_keys')">
+    <meta name="description" content="@yield('seo_desc')">
+    
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
-
-    <!-- Standard Favicon -->
+    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>   
     <link rel="icon" type="image/x-icon" href="{{ asset('/segade/img/favicon.ico')}}" />
-    
-    <!-- For iPhone 4 Retina display: -->
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images//apple-touch-icon-114x114-precomposed.png">
-    
-    <!-- For iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images//apple-touch-icon-114x114-precomposed.png">    
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images//apple-touch-icon-72x72-precomposed.png">   
-    <!-- For iPhone: -->
-    <link rel="apple-touch-icon-precomposed" href="images//apple-touch-icon-57x57-precomposed.png">     
-    
+    <link rel="apple-touch-icon-precomposed" href="images//apple-touch-icon-57x57-precomposed.png">    
     <link href="{{ asset('/segade/libraries/lightslider/lightslider.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/segade/revolution/css/settings.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/segade/revolution/css/layers.css')}}" rel="stylesheet" type="text/css">
@@ -37,10 +23,17 @@
     <link href="{{ asset('/segade/css/style.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/segade/css/pulse.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/segade/css/custom_pulse.css')}}" rel="stylesheet" type="text/css">
-    @yield('css') 
-    <!--[if lt IE 9]>
-        <script src="js/html5/respond.min.js"></script>
-    <![endif]-->
+    @yield('css')
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121624445-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-121624445-1');
+    </script>    
     
 </head>
 <body>
@@ -62,66 +55,42 @@
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
                                     </button>
-                                    <a href="index.html" class="navbar-brand"><img src="{{url('/segade/img/logo-segade.png')}}" alt="Logo" width="200px;"/></a>
+                                    <a href="{{route('home')}}" class="navbar-brand">
+                                        <img src="{{url('/segade/img/logo-segade.png')}}" alt="Compro Oro Málaga" title="Compro Oro Málaga" width="200px;"/>
+                                    </a>
                                 </div>
-                                <div class="menu-icon">
-                                <!--<div class="cart">                          
-                                    <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" title="Cart" id="language" type="button" class="btn dropdown-toggle"><i class="fa fa-shopping-cart"></i></button>
-                                    <ul class="dropdown-menu no-padding">
-                                        <li class="mini_cart_item">
-                                            <a href="#" class="cart-item-image">
-                                                <img width="70" height="70" alt="poster_2_up" class="attachment-shop_thumbnail" src="http://placehold.it/70x70/ddd">
-                                            </a>
-                                            <div class="cart-detail">
-                                                <a href="#">denim dots t-shirt</a>
-                                                <span class="quantity">$105.25</span>
-                                                <a href="#" class="remove-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="mini_cart_item">
-                                            <a href="#" class="cart-item-image">
-                                                <img width="70" height="70" alt="poster_2_up" class="attachment-shop_thumbnail" src="http://placehold.it/70x70/ddd">
-                                            </a>
-                                            <div class="cart-detail">
-                                                <a href="#">denim dots t-shirt</a>
-                                                <span class="quantity">$105.25</span>
-                                                <a href="#" class="remove-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="subtotal">
-                                            <h5>subtotal <span>$12,99</span></h5>
-                                        </li>
-                                        <li class="button">
-                                            <a href="#" title="View Cart">View Cart</a>
-                                            <a href="#" title="Check Out">Check out</a>
-                                        </li>
-                                    </ul>
-                                </div>-->
+                                <div class="menu-icon">                                
                                     <div class="search">    
                                         <a href="#" id="search" title="Buscar"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>              
                                 <div class="navbar-collapse collapse navbar-right" id="navbar">
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li class="{{ \Route::current()->getName() === 'home' ? 'active' : '' }} ">
-                                            <a href="{{route('home')}}" >Inicio</a>                                
-                                        </li>                           
+                                        <li class="dropdown ">
+                                            <a href="!#" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Servicios <i class="fa fa-angle-down"></i> </a>
+                                            <i class="ddl-switch fa fa-angle-down"></i>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="{{route('page','compra-de-oro')}}">Compra / Venta de Oro</a></li>
+                                                <li><a href="{{route('page','empeno')}}">Empeño</a></li>                          
+                                            </ul>
+                                        </li>                          
                                         <li class="dropdown {{ \Route::current()->getName() === 'categories' ? 'active' : '' }} ">
                                             <a href="{{route('categories')}}" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Categorías <i class="fa fa-angle-down"></i> </a>
-                                            
+                                            <i class="ddl-switch fa fa-angle-down"></i>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{{route('product',['anillos'])}}">Anillos</a></li>
-                                                <li><a href="{{route('product',['pulseras'])}}">Pulseras</a></li>
-                                                <li><a href="{{route('product',['collares'])}}">Collares</a></li>
-                                                <li><a href="{{route('product',['cadenas'])}}">Cadenas</a></li>
-                                                <li><a href="{{route('product',['colgantes'])}}">Colgantes</a></li>
-                                                <li><a href="{{route('product',['pendientes'])}}">Pendientes</a></li>
-                                                <li><a href="{{route('product',['joyas'])}}">Joyas con diamantes</a></li>
+                                                @foreach($categories->sortBy('category_name') as $category)
+                                                <li><a href="{{route('product',[$category->category_slug])}}">{{$category->category_name}}</a></li>
+                                                @endforeach
+                                                <li><a href="{{route('novedades')}}">Novedades</a></li>
                                             </ul>
                                         </li>
-                                        <li >
-                                            <a href="index.html" >Blog</a>                              
-                                        </li>
+                                        <li class="{{Request::is('blog*') ? 'active' : '' }} ">
+                                            <a href="{{route('blog')}}" >Blog</a>                              
+                                        </li> 
+                                        <li class="{{Request::is('page/quienes-somos') ? 'active' : '' }} ">
+                                            <a href="{{route('page','quienes-somos')}}" >Quienes somos</a>                              
+                                        </li >
+                                                                      
                                         <li class="{{\Route::current()->getName() === 'contactos' ? 'active' : '' }} ">
                                             <a href="{{route('contactos')}}" >Contacto</a>                              
                                         </li>
@@ -129,11 +98,15 @@
                                             @if(auth()->check())
                                                 <a  class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-user"></i> 
-                                                    {{ auth()->user()->email }} 
+                                                    {{ auth()->user()->name }} 
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="{{route('history')}}">Historial de apartados</a></li>
+                                                <i class="ddl-switch fa fa-angle-down"></i>
+                                                <ul class="dropdown-menu" role="menu">     
+                                                    @if(auth()->user()->is_admin)  
+                                                     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                                                    @endif                                           
+                                                    <li><a href="{{route('history')}}">Historial de reservados</a></li>
                                                     <li><a href="{{route('reserved')}}">Cestas</a></li>
                                                     <li><a href="{{route('logout')}}">Cerrar sesion</a></li>                     
                                                 </ul>     
@@ -148,8 +121,13 @@
                             <div class="search-box">
                                 <button type="button" class="close"><i class="icon icon-arrows-circle-remove"></i></button>
                                 <form action="{{route('search')}}" method="get">
-                                    <input type="search" name="search" placeholder="Como se llama el producto?" />
-                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                    <dir style="position: absolute;top: 50%; width: 100%; text-align:center;
+">
+                                        <input type="search" name="search" placeholder="¿Qué buscas?">
+                                        
+                                        <button type="submit" class="btn btn-primary">Buscar</button>
+                                    </dir>
+                                        
                                 </form>
                             </div><!-- Search Box /- -->
                             
@@ -167,9 +145,9 @@
     <footer class="container-fluid no-left-padding no-right-padding footer-2">
         <div class="container">
             <div class="template-info">
-                <a href="#" title=""><img src="{{url('/segade/img/logo_b.png')}}" alt="segade oro" class="logo_footer" /></a>
+                <a href="{{route('home')}}" title=""><img src="{{url('/segade/img/logo_b.png')}}" alt="Casa de empeños en Málaga" class="Casa de empeños en Málaga" /></a>
                 
-                <p>5th Floor, ABC Building, 456 New Design St, Melbourne, Australia <span><a href="tel:+0049654781235">(+ 004) 965 478 1235</a> - <a href="hello@example.com">hello@example.com</a></span></p>
+                <p>C/ Héroe de Sostoa, 91 CP 29002 Málaga<span><a href="tel:+34951112626">(+ 34) 951 112 626</a> - <a href="segadeoro@segade.com">hola@segadeoro.com</a></span></p>
                 <!--<ul>
                     <li><a href="#" title="twitter">twitter</a></li>
                     <li><a href="#" title="facebook">facebook</a></li>
@@ -180,8 +158,8 @@
             </div>
         </div><!-- Container /- -->
         <div class="copyright">
-            <p>Copyrights &copy; 2016 by <span><a href="https://rocketfy.es">Rocketfy</a></span>. All Rights Reserved </p>
-            <a class="backto-top" id="back-to-top" href="#"><i class="fa fa-long-arrow-up"></i></a>
+
+            <p>(c) {{date('Y')}} Desarrollado con <i class="fa fa-heart" style="color:red"></i> por <a href="https://rocketfy.es" title="Diseño web en Málaga" target="blank">Rocketfy</a></p>
         </div>
     </footer>
         

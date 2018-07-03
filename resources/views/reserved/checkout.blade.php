@@ -12,7 +12,7 @@
                     <div class="row">
                         <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                             <h1 class="os-font">Revision</h1>
-                            <p class="dark-color">Un solo paso para terminar</p>
+                            <p class="dark-color">Estos son los productos que te reservamos en la web para buscar en nuestro establecimiento.</p>
                             <div class="heading-line"></div>
                         </div>
                     </div>                      
@@ -22,7 +22,7 @@
                         @if(count($reserved_products)>0)
                         <div class="col-md-6 pb-4">
                             <div class="checkout">
-                                <h3 class="text-uppercase mb-2 dark-color os-font">Detalles de apartado</h3>
+                                <h3 class="text-uppercase mb-2 dark-color os-font">Detalles</h3>
                                 <form action="{{route('store_r')}}" method="post">
                                     @csrf
                                 <div class="form-checkout">                                     
@@ -43,7 +43,7 @@
                                         </div>
                                     </div>                                  
 
-                                    <div class="row">
+                                    <!--<div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label class="text-uppercase"> Fecha de entrega </label>
                                             <input type="date" class="highlighted" name="date_arrival" required >
@@ -52,7 +52,7 @@
                                             <label class="text-uppercase">hora </label>
                                             <input type="time" class="highlighted" name="hour" required >
                                         </div>
-                                    </div>
+                                    </div>-->
 
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
@@ -65,6 +65,9 @@
                                         <div class="col-md-12">
                                             <input type='submit' class="btn btn-color" value="Procesar Orden">
                                         </div>
+                                        <div class="col-md-12"  >
+                                            <label style="margin-top: 10px;color: #f44336;">La reserva tendrá validez durante 5 días. En caso de no hacerse efectiva, el producto se pondrá automáticamente a la venta de nuevo</label>
+                                        </div>
                                     </div>
                                 </div>
                                 </form>
@@ -72,19 +75,19 @@
                         </div>
                         <div class="col-md-6 pb-4">
                             <div class="payment">
-                                <h3 class="text-uppercase mb-2 dark-color os-font">Productos a apartar</h3>
+                                <h3 class="text-uppercase mb-2 dark-color os-font">Productos a reservar</h3>
                                 <div class="payment-product-list">
                                     <ul>
                                         @foreach($reserved_products as $product)
                                         <li>
                                             <div class="product-item">
-                                                <a target="_blanck" href="{{route('product',[$product->category,$product->slug])}}" class="product-img">
+                                                <a target="_blanck" href="{{route('product',[$product->product->category->slug,$product->slug])}}" class="product-img">
                                                     <img src="{{$product->img}}" alt="">
-                                                    <span>{{$product->quantity}}</span>
+                                                    
                                                 </a><!-- .product-mini__img -->
                                                 <div class="product-body">
                                                     <h4 class="product-name"><a href="#">{{$product->title}}</a></h4>
-                                                    <span class="product-price">€{{number_format($product->price,2)}} x {{$product->quantity}}</span>
+                                                    <span class="product-price">{{number_format($product->price,2)}}€</span>
                                                 </div><!-- .product-mini__body -->
 
                                                 <div class="product-button">
@@ -106,7 +109,7 @@
                         </div>
                         @else
                         <div class="padding-100"></div>
-                            NO hay productos                                
+                            No hay productos                                
                         @endif
                         <div class="padding-100"></div>
                     </div>

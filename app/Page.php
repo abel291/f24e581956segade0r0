@@ -44,8 +44,7 @@ class Page extends Eloquent
 		'address',
 		'map',
 		'email',
-		'note',
-		
+		'note',		
 		'slug',
 		'entry',
 		'content',

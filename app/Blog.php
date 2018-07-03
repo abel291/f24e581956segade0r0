@@ -5,7 +5,7 @@
  * Date: Fri, 25 May 2018 21:59:41 +0000.
  */
 
-namespace App\Models;
+namespace App;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -25,12 +25,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $main_img
  * @property bool $activo
  *
- * @package App\Models
+ * @package App
  */
 class Blog extends Eloquent
 {
 	protected $table = 'blog';
-	public $timestamps = false;
 
 	protected $casts = [
 		'categoria' => 'int',
@@ -42,7 +41,7 @@ class Blog extends Eloquent
 	];
 
 	protected $fillable = [
-		'categoria',
+		'so_categories_id',
 		'titulo',
 		'slug',
 		'entradilla',

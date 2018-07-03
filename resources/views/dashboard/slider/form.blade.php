@@ -8,13 +8,7 @@
 		<div id="tab-1" class="tab-pane active">
 			<div class="panel-body">
 
-				<fieldset class="form-horizontal">
-					<div class="form-group"><label class="col-sm-2 control-label">Titulo:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control"   name="title" 
-							value="{{$edit? $slider->title : old('title') }}">
-						</div>
-					</div>
+				<fieldset class="form-horizontal">					
 					<div class="form-group"><label class="col-sm-2 control-label">Link:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control"   name="href" 
@@ -24,9 +18,10 @@
 					<div class="form-group"><label class="col-sm-2 control-label">Tipo de slider:</label>
 						<div class="col-sm-10">
 							<select class="form-control" name="tipo">
-								<option {{$edit && $slider->tipo==1?'selected':''}} value="1">Slider pequeño</option>
-								<option {{$edit && $slider->tipo==0?'selected':''}} value="0">Slider grande</option>
+								<option {{$edit && $slider->tipo==1?'selected':''}} value="1">Slider grande (Principal)</option>
+								<option {{$edit && $slider->tipo==0?'selected':''}} value="0">Slider pequeño</option>								
 							</select>
+							<span class="help-block m-b-none">Solo puede haber dos slider pequeño Publicados</span>
 						</div>
 					</div>	
 					<div class="form-group"><label class="col-sm-2 control-label">Status:</label>
@@ -36,13 +31,19 @@
 								<option {{$edit && $slider->activo==0?'selected':''}} value="0">Pausada</option>
 							</select>
 						</div>
-					</div>					
+					</div>
+
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Contenido imagen:</label>
-						<div class="col-sm-10">
-							<textarea class="input-block-level" id="summernote" name="content" rows="18">
-								{{$edit? $slider->content : old('content') }}								
-							</textarea>
+						<div class="col-sm-6">
+							<textarea class=" form-control" id="slider" name="content" rows="6" placeholder="TEXTO">{!!$edit? str_replace( "<br />", "", $slider->content) : old('content') !!}</textarea>
+
+						</div>
+					</div>
+					<div class="form-group"><label class="col-sm-2 control-label">Color de texto:</label>
+						<div class="col-sm-2">
+							<input class="form-control text_color" type="text" class="form-control"   name="text_color" 
+							value="{{$edit? $slider->text_color : old('text_color') }}">
 						</div>
 					</div>							
 				</fieldset>

@@ -94,9 +94,9 @@
 		   		
 		   		url=$(this).attr('id');
 		   		$('.modal .modal-title').text('Borrar Imagen')
-		   		$('.modal .modal-body').text('Desea Borrar la iamgen?')
+		   		$('.modal .modal-body').text('Desea Borrar la imagen?')
 		   		$('.modal .modal-footer .btn')
-		   		.text('Borrar Imagen0 ')
+		   		.text('Borrar Imagen')
 		   		.attr('href', url)
 		   		.removeClass('btn-success')
 		   		.addClass('btn-danger');	   

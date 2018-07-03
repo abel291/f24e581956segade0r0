@@ -20,14 +20,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected function authenticated($request, $user)
-    {
-        if($user->is_admin) {
-            return redirect()->intended('/dashboard');
-        }
+    
 
-        return redirect()->intended('/');
-    }
     /**
      * Where to redirect users after login.
      *
@@ -43,5 +37,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+    }
+
+    protected function authenticated($request, $user)
+    {
+        if($user->is_admin) {
+            return redirect()->intended('/dashboard');
+        }
+
+        return redirect()->intended('/');
+    }
+    public function showLoginForm()
+    {
+        $categories=\App\Category::
+          where('products.activo',1)
+          ->orderBy('products.id','desc')
+          ->join('products', 'categories.id','=','products.so_categories_id')                       
+          ->select('categories.slug as category_slug','categories.name as category_name')
+          ->get()->unique('category_name');  
+
+        return view('auth.login', compact('title','categories'));
     }
 }

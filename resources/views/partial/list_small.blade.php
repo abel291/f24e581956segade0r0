@@ -4,7 +4,7 @@
     <div class="product-thumb-wrap">
         <div class="product-thumb">            
             <a href="{{route('product',[$product->category_slug,$product->slug])}}">
-                <img src="{{$product->img}}" alt="">
+                <img src="{{$product->img}}" alt="{{$product->category_name}} - {{$product->title}}" title="{{$product->category_name}} - {{$product->title}}">
             </a>
         </div>
     </div>
@@ -12,7 +12,7 @@
         <a href="{{route('product',[$product->category_slug,$product->slug])}}">
             <h3 class="os-font  fw-600">{{$product->title}}</h3>
         </a>
-        <div class="os-font price  fw-600">€{{number_format($product->price,2)}}</div>
+        <div class="os-font price  fw-600">{{number_format($product->price,2)}}€</div>
     </div>
     
 </li>

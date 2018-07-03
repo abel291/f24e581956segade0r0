@@ -8,7 +8,11 @@
 	@include('dashboard.notificaciones.notificaciones')
 	<div class="ibox float-e-margins">                   
 		<div class="ibox-title text-right">
-            <a href="{{route('usuarios.create')}}" class=""><b><i class="fa fa-plus"></i> Agregar user</b></a>
+            <h5>Usuarios registrados</h5>
+            <div class="ibox-tools">
+                <a style="color: #337ab7;" href="{{route('usuarios.create')}}" class=""><b><i class="fa fa-plus"></i> Agregar user</b></a>
+            </div>
+            
         </div>
 		<div class="ibox-content">		
 			<table class="table datatable table-striped table-hover user_table">
