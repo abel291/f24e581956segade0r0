@@ -11,7 +11,7 @@
     
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>   
+    <title>@yield('title') | {{config('app.name')}}</title>   
     <link rel="icon" type="image/x-icon" href="{{ asset('/segade/img/favicon.ico')}}" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images//apple-touch-icon-114x114-precomposed.png">    
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images//apple-touch-icon-72x72-precomposed.png">   
@@ -65,35 +65,28 @@
                                     </div>
                                 </div>              
                                 <div class="navbar-collapse collapse navbar-right" id="navbar">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li class="dropdown ">
-                                            <a href="!#" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Servicios <i class="fa fa-angle-down"></i> </a>
-                                            <i class="ddl-switch fa fa-angle-down"></i>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{{route('page','compra-de-oro')}}">Compra / Venta de Oro</a></li>
-                                                <li><a href="{{route('page','empeno')}}">Empeño</a></li>                          
-                                            </ul>
-                                        </li>                          
+                                    <ul class="nav navbar-nav navbar-right">                                       
+
+                                        <li class="{{Request::is('compra-de-oro*') ? 'active' : '' }} ">
+                                            <a href="{{route('page','compra-de-oro')}}" >Compra y venta de oro</a>                              
+                                        </li>
+
                                         <li class="dropdown {{ \Route::current()->getName() === 'categories' ? 'active' : '' }} ">
-                                            <a href="{{route('categories')}}" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Categorías <i class="fa fa-angle-down"></i> </a>
+                                            <a href="{{route('categories')}}" class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">Joyería <i class="fa fa-angle-down"></i> </a>
                                             <i class="ddl-switch fa fa-angle-down"></i>
                                             <ul class="dropdown-menu" role="menu">
                                                 @foreach($categories->sortBy('category_name') as $category)
                                                 <li><a href="{{route('product',[$category->category_slug])}}">{{$category->category_name}}</a></li>
                                                 @endforeach
-                                                <li><a href="{{route('novedades')}}">Novedades</a></li>
+                                                <li><a href="{{url('/novedades')}}">Novedades</a></li>                                               
                                             </ul>
                                         </li>
                                         <li class="{{Request::is('blog*') ? 'active' : '' }} ">
                                             <a href="{{route('blog')}}" >Blog</a>                              
                                         </li> 
-                                        <li class="{{Request::is('page/quienes-somos') ? 'active' : '' }} ">
-                                            <a href="{{route('page','quienes-somos')}}" >Quienes somos</a>                              
-                                        </li >
-                                                                      
-                                        <li class="{{\Route::current()->getName() === 'contactos' ? 'active' : '' }} ">
-                                            <a href="{{route('contactos')}}" >Contacto</a>                              
-                                        </li>
+                                        <li class="{{Request::is('page/empeno') ? 'active' : '' }} ">
+                                            <a href="{{route('empeno')}}">Empeño</a>                              
+                                        </li >                                        
                                         <li class="dropdown ">
                                             @if(auth()->check())
                                                 <a  class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">
@@ -121,8 +114,7 @@
                             <div class="search-box">
                                 <button type="button" class="close"><i class="icon icon-arrows-circle-remove"></i></button>
                                 <form action="{{route('search')}}" method="get">
-                                    <dir style="position: absolute;top: 50%; width: 100%; text-align:center;
-">
+                                    <dir style="position: absolute;top: 50%; width: 100%; text-align:center;">
                                         <input type="search" name="search" placeholder="¿Qué buscas?">
                                         
                                         <button type="submit" class="btn btn-primary">Buscar</button>
@@ -141,20 +133,20 @@
         </div>
     </div>
 
-
     <footer class="container-fluid no-left-padding no-right-padding footer-2">
         <div class="container">
             <div class="template-info">
-                <a href="{{route('home')}}" title=""><img src="{{url('/segade/img/logo_b.png')}}" alt="Casa de empeños en Málaga" class="Casa de empeños en Málaga" /></a>
+                <a href="{{route('home')}}" class="footer-img"><img src="{{url('/segade/img/logo_b.png')}}" alt="Casa de empeños en Málaga" title="Casa de empeños en Málaga" /></a>
                 
                 <p>C/ Héroe de Sostoa, 91 CP 29002 Málaga<span><a href="tel:+34951112626">(+ 34) 951 112 626</a> - <a href="segadeoro@segade.com">hola@segadeoro.com</a></span></p>
-                <!--<ul>
-                    <li><a href="#" title="twitter">twitter</a></li>
-                    <li><a href="#" title="facebook">facebook</a></li>
-                    <li><a href="#" title="google+">google+</a></li>
-                    <li><a href="#" title="pinterest">pinterest</a></li>
-                    <li><a href="#" title="dribbble">dribbble</a></li>
-                </ul>-->
+                <ul>                    
+                    <li><a href="https://www.facebook.com/segadecomprooro/" title="facebook">facebook</a></li>
+                    <li><a href="https://plus.google.com/u/1/108107907386449557440" title="google+">google+</a></li>
+                    <li><a href="{{route('page','politicas-legales')}}" title="Politicas Legales">Politicas Legales</a></li>
+                    <li><a href="{{route('contactos')}}" title="Contacto">Contacto</a></li>
+                    <li><a href="{{route('page','quienes-somos')}}" title="Quiene Somos">Quiene Somos</a></li>
+                    
+                </ul>
             </div>
         </div><!-- Container /- -->
         <div class="copyright">
@@ -176,6 +168,7 @@
     <script type="text/javascript" src="{{ asset('/segade/revolution/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/segade/revolution/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/segade/revolution/js/extensions/revolution.extension.navigation.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/segade/js/herbyCookie.js')}}"></script>
     <!-- Library - Theme JS --> 
     <script src="{{ asset('/segade/js/functions.js')}}"></script>
     @yield('js')

@@ -23,12 +23,12 @@
 						</div>
 					</div>
 					<div class="form-group"><label class="col-lg-2 control-label">Entradilla</label>
-						<div class="col-lg-5">
+						<div class="col-lg-10">
 							<input type="text" name="entradilla" class="form-control" value="{{$edit? $entrada->entradilla : old('entradilla') }}"> 
 						</div>
 					</div>
 					<div class="form-group"><label class="col-sm-2 control-label">Categoría:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-2">
 							<select class="form-control" name="so_categories_id">
 								<option></option>
 								@foreach(App\Category::get() as $category)
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div class="form-group"><label class="col-sm-2 control-label">Status:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-2">
 							<select class="form-control" name="activo">
 								<option {{$edit && $entrada->activo==1?'selected':''}} value="1">Publicada</option>
 								<option {{$edit && $entrada->activo==0?'selected':''}} value="0">Pausada</option>

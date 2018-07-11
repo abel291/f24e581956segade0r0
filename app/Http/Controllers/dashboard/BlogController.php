@@ -50,10 +50,10 @@ class BlogController extends Controller
             'so_categories_id'=>'required',            
             'titulo'      =>'required|max:120',  
             'entradilla'  =>'required|max:255',                 
-            'contenido'   => ' required',
-            'seo_title'   =>'nullable|max:75',
-            'seo_desc'    =>'nullable|max:320',
-            'seo_keys'    =>'nullable|max:140',            
+            'contenido'   =>'required',
+            'seo_title'   =>'nullable|max:120',
+            'seo_desc'    =>'nullable|max:180',
+            'seo_keys'    =>'nullable|max:120',            
         ]);
  
         if ($v->fails())
@@ -106,12 +106,12 @@ class BlogController extends Controller
     {
         $v = Validator::make($request->all(), [            
             'so_categories_id'=>'required',            
-            'titulo'     =>'required|max:120',  
-            'entradilla' =>'required|max:255',                 
-            'contenido'  => ' required',
-            'seo_title'  =>'nullable|max:75',
-            'seo_desc'   =>'nullable|max:320',
-            'seo_keys'   =>'nullable|max:140',           
+            'titulo'      =>'required|max:120',  
+            'entradilla'  =>'required|max:255',                 
+            'contenido'   =>'required',
+            'seo_title'   =>'nullable|max:120',
+            'seo_desc'    =>'nullable|max:180',
+            'seo_keys'    =>'nullable|max:120',                 
         ]);
  
         if ($v->fails())
@@ -148,6 +148,12 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $entrada=Blog::findOrFail($id);
+        if ($entrada) {
+            $entrada->main_img=str_replace("https://segadeoro.s3.us-east-2.amazonaws.com/", '', $entrada->main_img);
+            if (Storage::exists($entrada->main_img)) {                
+                Storage::delete($entrada->main_img);
+            }
+        }
         $entrada->delete();
         return redirect()->route('blog.index')
             ->withSuccess('Entrada eliminada con exito');
@@ -176,9 +182,9 @@ class BlogController extends Controller
             }
             $lienzo = imagecreatetruecolor(1200,$nuevo_largo );           
             imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, 1200,$nuevo_largo , $ancho, $largo);
-            imagejpeg( $lienzo, $filename,80);
+            imagejpeg( $lienzo, $temppath,80);
 
-            $file=$filename;
+            $file=$temppath;
                     
         }          
         $img=\Image::make($file)->stream('jpg');                       

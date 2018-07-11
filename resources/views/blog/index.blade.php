@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title','Blog' )
 @section('content')
-<div class="section pt-7 pb-7">
+<div class="section pt-7 pb-20">
     <div class="container">
         <div class="row">
-            <div class="blog-grid masonry-grid-post">
+            <div class="blog-grid">
                 @foreach($entradas as $entrada)
                 <div class="blog-item masonry-item col-sm-4" data-color="rgb(32, 221, 222)" >
                     <a href="{{route('entradas',[$entrada->category_slug,$entrada->slug])}}" >
@@ -21,7 +21,7 @@
                     </h4>
                     
                     <div class="blog-content">
-                        <p>{{str_limit($entrada->contenido,150)}}</p>
+                        <p>{{$entrada->entradilla}}</p>
                         <a class="readmore" href="{{route('entradas',[$entrada->category_slug,$entrada->slug])}}" >Ver mas →</a>
                     </div>
                     <div class="blog-footer">                        

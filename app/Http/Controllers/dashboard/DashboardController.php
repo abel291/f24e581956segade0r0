@@ -17,6 +17,7 @@ class DashboardController extends Controller
     {	
     	$products=Product::
         join('categories', 'products.so_categories_id', '=', 'categories.id')
+        ->where('products.activo',1)
         ->select('products.*',
             'categories.slug as category_slug',
             'categories.name as category_name',         

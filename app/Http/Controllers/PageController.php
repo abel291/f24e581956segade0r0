@@ -22,4 +22,10 @@ class PageController extends Controller
     	$categories=$this->categories;
     	return view('page.index',compact('page','categories'));
     }
+    public function empeno()
+    { 
+      $page=Page::where('slug','empeno-malaga')->first();
+      $categories=$this->categories;
+      return view('page.index',compact('page','categories'));
+    }
 }

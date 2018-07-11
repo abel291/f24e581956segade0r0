@@ -43,6 +43,7 @@
 								<option  value="{{$category->id}}" {{$edit && $product->so_categories_id==$category->id?'selected':''}} >{{$category->name}}</option>
 								@endforeach
 							</select>
+							<span class="help-block m-b-none">Todo los productos ingresados recientemente estaran disponibles tambien en la seccion de <a href="{{url('/novedades')}}">novedades</a>, no es nesario crear una categoria con dicho nombre</span>
 						</div>
 					</div>
 					<div class="form-group"><label class="col-sm-2 control-label">Status:</label>

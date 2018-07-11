@@ -44,6 +44,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
+
+
         $('#summernote').summernote();
         var postForm = function() {
 			var content = $('textarea[name="descripcion"]').html($('#summernote').code());
@@ -101,6 +103,16 @@
 		   		.removeClass('btn-success')
 		   		.addClass('btn-danger');	   
 		});
+		@if(!$edit)
+		$(document).on('change', 'select[name="so_categories_id"] ', function(event) {
+			let categoria=$('select[name="so_categories_id"] option:selected').text();
+			console.log('DDDD')
+			let producto=$('input[name="title"]').val();
+			$('input[name="seo_title"]').val('Comprar '+categoria+' en Málaga')
+			$('input[name="seo_desc"]').val('Comprar '+categoria+' '+producto+'en Málaga. Segade Joyería de segunda mano en Málaga.')
+		});
+		@endif
+
 
 	
 });//ready

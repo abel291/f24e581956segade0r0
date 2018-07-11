@@ -42,7 +42,7 @@
                                             <input type="text" class="highlighted" value="{{auth()->user()->telefono}}" disabled>
                                         </div>
                                     </div>                                  
-
+                                    
                                     <!--<div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label class="text-uppercase"> Fecha de entrega </label>
@@ -60,6 +60,12 @@
                                             <textarea class="highlighted" rows="7" placeholder="Algo que quiera comentar?" name="note"></textarea>
                                         </div>
 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2 politicas">                                            
+                                            <input type="checkbox" required  style="margin: 0px;">
+                                            <label class="text-uppercase" style="margin-bottom: 0px;">Acepto las  <a href="{{route('page','politicas-legales')}}">Politicas de privacidad</a></label>
+                                        </div>                                          
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">

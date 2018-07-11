@@ -45,6 +45,9 @@ class CategoryController extends Controller
     {
         $v = Validator::make($request->all(), [            
             'name'=>'required',
+            'seo_title'=>'nullable|max:120',
+            'seo_desc'=>'nullable|max:180',
+            'seo_keys'=>'nullable|max:120',
             'img' => 'image|mimes:jpeg,jpg,png|max:10000',          
         ]);
  
@@ -100,6 +103,9 @@ class CategoryController extends Controller
         $v = Validator::make($request->all(), [            
             'name'=>'required',
             'color'=>'required',
+            'seo_title'=>'nullable|max:120',
+            'seo_desc'=>'nullable|max:180',
+            'seo_keys'=>'nullable|max:120',
             'img' => 'image|mimes:jpeg,jpg,png|max:10000',          
         ]);
  
@@ -111,16 +117,19 @@ class CategoryController extends Controller
         $categoria=Category::findOrFail($id);
         $categoria->slug=str_slug($request->name);
         $categoria->color=$request->color;        
+        $categoria->seo_title=$request->seo_title;        
+        $categoria->seo_desc=$request->seo_desc;        
+        $categoria->seo_keys=$request->seo_keys;      
         
-        $categoria->img=str_replace("https://segadeoro.s3.us-east-2.amazonaws.com/", '', $categoria->img);
-        
-        if (Storage::exists($categoria->img)) {                
-            Storage::delete($categoria->img);
-        }
 
         $files=$request->file('img');
         if ($files) {
+            $categoria->img=str_replace("https://segadeoro.s3.us-east-2.amazonaws.com/", '', $categoria->img);        
+            if (Storage::exists($categoria->img)) {                
+                Storage::delete($categoria->img);
+            }
             $categoria->img=$this->upload_img($files,$request->name);
+
         }       
         //dd($categoria);
         $categoria->save();

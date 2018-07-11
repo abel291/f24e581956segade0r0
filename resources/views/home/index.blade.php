@@ -1,8 +1,15 @@
 @extends('layouts.app')
-@section('title', 'Inicio')
+@section('title', 'Compro Oro Málaga | Joyería | Segade Compro Oro')
+@section('seo_desc','Compro Oro Málaga. Tienda y joyería donde comprar y vender oro, plata, joyas y piedras preciosas al mejor precio en el centro de Málaga.' )
+@section('seo_keys','compro oro Málaga, joyas segunda mano, comprar joyas baratas' )
+
 @section('content')
+<div class="section-header5 pt-5 pb-10">
+    <h1>Un nuevo concepto de Compra de Oro en Málaga: Segade</h1>    
+</div>
 <!-- Slider Section -->
 <div id=" home-shop-slider1" class="slider-section container">
+
     <!-- START REVOLUTION SLIDER 5.0 -->
     <div class="rev_slider_wrapper">
         <div id="shop-slider1" class="rev_slider" data-version="5.0">
@@ -11,7 +18,7 @@
                 <li data-transition="fade"> 
                     <a href="{{$slider->href}}">
                         <!-- MAIN IMAGE -->
-                        <img src="{{$slider->img}}"  alt="Joyas de segunda mano en Málaga" title="Joyas de segunda mano en Málaga"  style="width: 100%;" > 
+                        <img src="{{$slider->img}}"  alt="Compro oro Málaga" title="Joyas de segunda mano en Málaga"  style="width: 100%;" > 
                         <!-- LAYER NR. 1 -->
 
 
@@ -66,7 +73,11 @@
         </div>
     </div>
     <div class="padding-30"></div>  
-</div><!-- Promotion Section /- -->
+</div>
+<div class="section-header5">
+    <h2>Bienvenid@ a la web de Segade Compro Oro en Málaga</h2>    
+</div>
+
 <div  class="section border-bottom pt-7 pb-7">
     <div class="container">
         <div class="row">
@@ -90,6 +101,21 @@
         </div>
 
     </div>
+</div>
+<div  class="section border-bottom pt-7 pb-7">
+   <div class="container">
+    <div class="row">
+        <div class="col-md-12  joyeria">
+            <p><strong>Segade compro oro</strong> es una <strong>tienda de compra y venta de oro</strong> especializada en <i>comprar y vender oro, plata y metales preciosos</i> situada en el centro de Málaga.</p>
+
+            <p>Es, además, un espacio para la <strong>joyería</strong> donde puede comprar y vender joyas. Disponemos de un amplio catálogo de anillos, colgantes, pendientes, etc. en las mejores condiciones. Puede ver esta gama de joyas en esta página web y <strong>reservar la joya</strong> que más le interese y finalizar la compra en nuestra tienda si así lo desea.</p>
+
+           <p> Adicionalmente ofrecemos <strong>servicios de empeño en Málaga</strong>. Si no quiere desprenderse de sus bienes más preciados pero necesita liquidez inmediata para hacer frente a un gasto imprevisto, permitirse un lujo o por cualquier otra circunstancia ponemos a su disposición un servicio de empeño profesional.</p>
+
+            <p>Con más de 10 años de experiencia en el sector queremos presentar una <strong>imagen moderna y renovada en el sector del compro oro en Málaga</strong>.</p>
+        </div>
+    </div>
+</div>
 </div>
 <div class="section pt-7 pb-7">
     <div class="container">                     
@@ -123,5 +149,14 @@
             </div>            
         </div>
     </div>
+</div>
+<div class="section-header5 pb-10">
+    <h2>No lo dude, venga a conocer Segade Compro Oro en Málaga</h2> 
+     <div class="container">
+    <div class="row">
+        <div class="col-md-12 joyeria pt-2">
+    <p>Le invitamos a que conozca nuestra tienda y a nuestros profesionales que estarán a su entera disposición para atenderle y encantados de resolver cualquier duda que pueda tener.</p>   
+</div>
+</div>
 </div>
 @endsection

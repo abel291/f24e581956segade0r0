@@ -11,8 +11,12 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('home');
+/*Route::get('/ddda', function () {
+   foreach (\App\Product::get() as $key => $value) {
+   		$value->seo_title='Comprar '.$value->category->name.' en Málaga';
+   		$value->seo_desc='Comprar '.$value->category->name.' '.$value->title.' en Málaga. Segade Joyería de segunda mano en Málaga.';
+   		$value->save();
+   	}	
 });*/
 
 Auth::routes();
@@ -50,11 +54,13 @@ Route::group(['prefix' => 'dashboard','middleware' => 'admin'], function() {
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/categorias', 'HomeController@categories')->name('categories');
+Route::get('/joyeria-segunda-mano-malaga', 'HomeController@categories')->name('categories');
 
 Route::get('/contacto', 'HomeController@contacts')->name('contactos');
 
 Route::get('/page/{slug}', 'PageController@index')->name('page');
+
+Route::get('/empeno-malaga', 'PageController@empeno')->name('empeno');
 
 Route::get('/cesta', 'ReservedController@reserved')->name('reserved')->middleware('auth');
 
@@ -74,7 +80,7 @@ Route::get('/blog', 'BlogController@index')->name('blog');
 
 Route::get('/blog/{categoria}/{slug?}/', 'BlogController@entradas')->name('entradas');
 
-Route::get('/novedades', 'ProductController@novedades')->name('novedades');
+//Route::get('/novedades', 'ProductController@novedades')->name('novedades');
 
 Route::get('/{categoria}/{slug?}/', 'ProductController@product')->name('product');
 

@@ -27,7 +27,23 @@
 							<input class="form-control text_color" type="text" class="form-control" name="color" 
 							value="{{$edit? $categoria->color : old('color') }}">
 						</div>
-					</div>  					
+					</div>
+
+					<div class="form-group"><label class="col-lg-2 control-label">seo_title</label>
+						<div class="col-lg-8">
+							<input type="text" name="seo_title" class="form-control" value="{{$edit? $categoria->seo_title : old('seo_title') }}"> 
+						</div>
+					</div>
+					<div class="form-group"><label class="col-lg-2 control-label">seo_desc</label>
+						<div class="col-lg-8">
+							<input type="text" name="seo_desc" class="form-control" value="{{$edit? $categoria->seo_desc : old('seo_desc') }}"> 
+						</div>
+					</div>
+					<div class="form-group"><label class="col-lg-2 control-label">seo_keys</label>
+						<div class="col-lg-8">
+							<input type="text" name="seo_keys" class="form-control" value="{{$edit? $categoria->seo_keys : old('seo_keys') }}"> 
+						</div>
+					</div>
 														
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Imagen:</label>

@@ -13,7 +13,7 @@
             @foreach($categories as $category)
             <a href="{{route('product',[$category->category_slug])}}">{{$category->category_name}}</a>
             @endforeach
-                                                       
+             <a href="{{url('/novedades')}}">Novedades</a>                                       
         </div>
     </div>
     <div class="widget widget_products">

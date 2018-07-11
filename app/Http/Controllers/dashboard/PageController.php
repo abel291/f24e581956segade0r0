@@ -86,12 +86,8 @@ class PageController extends Controller
             return redirect()->back()->withInput()->withErrors($v->errors());
         }        
                  
-        $page=Page::find($id);  
-        $page->phone=$request->phone;       
-        $page->address=$request->address; 
-        $page->map=$request->map; 
-        $page->email=$request->email; 
-        $page->note=$request->note; 
+        $page=Page::find($id);       
+        
         $page->entry=$request->entry; 
         $page->content=$request->content;
         $page->seo_title=$request->seo_title; 

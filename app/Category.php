@@ -31,6 +31,9 @@ class Category extends Eloquent
 	protected $fillable = [
 		'name',
 		'slug',
+		'seo_title',
+		'seo_desc',
+		'seo_keys',
 		'img',
 		'activo'
 	];

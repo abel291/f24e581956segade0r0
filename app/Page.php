@@ -39,12 +39,7 @@ class Page extends Eloquent
 	];
 
 	protected $fillable = [
-		'title',
-		'phone',
-		'address',
-		'map',
-		'email',
-		'note',		
+		'title',		
 		'slug',
 		'entry',
 		'content',

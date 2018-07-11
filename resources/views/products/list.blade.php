@@ -1,19 +1,22 @@
 @extends('layouts.app')
-@section('title',$products->search )
-
-@section('seo_desc',$products->search )
-@section('seo_keys',$products->search )
-
+@if( \Route::current()->getName() !== 'search')
+    @section('title',$products->first()->category_seo_title )
+    @section('seo_desc',$products->first()->category_seo_desc )
+    @section('seo_keys',$products->first()->category_seo_keys )
+@else
+    @section('title',$products->search )
+    @section('seo_desc',$products->search )
+    @section('seo_keys',$products->search )
+@endif
 @section('content')
 <div class="section pt-5 pb-10">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                    <h1 class="os-font">
-                        {{ $products->search }}
-                        
-                        </h1>                    
+                <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp">
+                    <h1 class="h1_p">Compra y venta de Joyeria en Malaga</h1>
+                    <h2 class="os-font">{{ $products->search }}</h2>                    
+                                        
                     <div class="heading-line"></div>
                 </div>
             </div>
@@ -23,9 +26,7 @@
                 @if( \Route::current()->getName() === 'search') 
                 <div class="commerce-result-count">{{$products->total()}} productos encontrados</div>
                 @endif
-                
 
-                
                 <ul class="products">
                     @include('partial.list_product',[$products])
                 </ul>

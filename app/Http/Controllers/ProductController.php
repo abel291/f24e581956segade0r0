@@ -24,8 +24,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function product($slug_ca,$slug_pro=null)
-    { 
-
+    {
         
         $products=Product::
             orderBy('id','desc')
@@ -34,21 +33,33 @@ class ProductController extends Controller
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
-                    'categories.name as category_name'                
+                    'categories.name as category_name',               
+                    'categories.seo_title as category_seo_title',               
+                    'categories.seo_desc as category_seo_desc',               
+                    'categories.seo_keys as category_seo_keys'               
             );
         
         $categories=$products;
-        $categories=$categories->get()->unique('category_name');
-
-        //dd($categories);
+        $categories=$categories->get()->unique('category_name');       
         
-        $economicos=$products;
-        $economicos=$economicos->where('categories.slug',$slug_ca)->get()->sortBy('price')->take(5);
         //list
-        if (!$slug_pro) {    
-            $products=$products->where('categories.slug',$slug_ca)->paginate(9);
-            $products->search=$products->first()->category_name;
+        if (!$slug_pro) {
+
+            if ($slug_ca=="novedades") {
+                $economicos=$products;
+                $economicos=$economicos->get()->sortBy('price')->take(5); 
+                $products=$products->paginate(9);
+                $products->search="Novedades";
+            }else{
+                $economicos=$products;
+                $economicos=$economicos->where('categories.slug',$slug_ca)->get()->sortBy('price')->take(5);
+                $products=$products->where('categories.slug',$slug_ca)->paginate(9);
+                $products->search=$products->first()->category_name;
+            }        
+            
+            //dd($products);
             return view('products.list',compact('products','economicos' ,'categories'));            
+        
         
         //detail
         }else{
@@ -72,7 +83,10 @@ class ProductController extends Controller
             ->select(
                     'products.*',
                     'categories.slug as category_slug' ,
-                    'categories.name as category_name'                
+                    'categories.name as category_name',
+                    'categories.seo_title as category_seo_title',               
+                    'categories.seo_desc as category_seo_desc',               
+                    'categories.seo_keys as category_seo_keys'                
             );
 
         $categories=$products;
@@ -89,8 +103,7 @@ class ProductController extends Controller
         return view('products.list',compact('products','economicos','categories')); 
     }
 
-    public function novedades(){
-        
+    /*public function novedades(){        
         $products=Product::
             orderBy('id','desc')
             ->join('categories', 'products.so_categories_id', '=', 'categories.id')
@@ -98,15 +111,14 @@ class ProductController extends Controller
             ->select('products.*','categories.slug as category_slug','categories.name as category_name');
         
         $categories=$products;
-        $categories=$categories->get()->unique('category_name');
-       
+        $categories=$categories->get()->unique('category_name');       
         
         $economicos=$products;
         $economicos=$products->get()->sortBy('price')->take(5);
         $products=$products->paginate(9);
         $products->search="Novedades";
         return view('products.list',compact('products','economicos' ,'categories'));  
-    }
+    }*/
 
     
     

@@ -7,8 +7,9 @@
 
                     <div class="row">
                         <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                            <h1 class="os-font"> Categorías</h1>
-                            
+                            <h1 class="h1_p "> Joyería segunda mano en Málaga</h1>
+                            <h1 class="os-font" > Joyería Segade</h1>
+
                             <div class="heading-line"></div>
                         </div>
                     </div>
