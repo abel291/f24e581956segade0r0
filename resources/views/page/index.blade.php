@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">        
+            <div class="col-md-12 page_contenido">        
                 {!! $page->content !!}
                 <img src="{!! $page->main_img !!}" class="img-responsive">
             </div>
