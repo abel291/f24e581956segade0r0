@@ -6,7 +6,7 @@
             policyText: "Política de cookies",
             text: "Utilizamos cookies propias y de terceros para mejorar nuestros servicios. Si continua navegando, consideramos que acepta su uso. Puede cambiar la configuración u obtener más información en el siguiente enlace",
             scroll: false,
-            link: "/page/politicas-legales"
+            link: "/politicas-legales"
         }, options);
         var herbyHtml = "<div class='herbyCookieConsent herbyIn'><p>" + settings.text + " " + "<a alt='" + settings.policyText + "' href='" + settings.link + "' target='_blank'>" + settings.policyText + "</a>.</p><a alt='" + settings.btnText + "' class='herbyBtn'>" + settings.btnText + "</a></div>";
         if (settings.style == "light") {

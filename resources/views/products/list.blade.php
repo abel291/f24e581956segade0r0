@@ -14,8 +14,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp">
-                    <h1 class="h1_p">Compra y venta de Joyeria en Malaga</h1>
-                    <h2 class="os-font">{{ $products->search }}</h2>                    
+                    <h1 class="h1_p">Compra y venta de Joyeria en Málaga</h1>
+                    <h2 class="os-font" style="text-transform: lowercase;">{{ $products->search }}</h2>                    
                                         
                     <div class="heading-line"></div>
                 </div>

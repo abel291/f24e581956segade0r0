@@ -1,5 +1,11 @@
 @extends('layouts.app')
-@section('title', ' Categorías')
+@section('title', 'Joyería segunda mano Málaga | Maxima Calidad | Segade Compro Oro')
+
+@section('seo_desc','Joyería de segunda mano en Málaga. Joyas en perfecto estado y máxima calidad. Compra y
+venta de joyas al mejor precio.')
+
+@section('seo_keys','joyeria segunda mano, joyeria segunda mano malaga')
+
 @section('content')
 <div class="section pt-5 ">
                 <div class="container">
@@ -7,8 +13,8 @@
 
                     <div class="row">
                         <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                            <h1 class="h1_p "> Joyería segunda mano en Málaga</h1>
-                            <h1 class="os-font" > Joyería Segade</h1>
+                            <h1 class="h1_p "> Joyería de segunda mano en Málaga</h1>
+                            <h2 class="os-font" > Joyería Segade</h2>
 
                             <div class="heading-line"></div>
                         </div>

@@ -582,7 +582,7 @@ span.onsale {
 
 .section-header5 h1, .section-header5 h2 {
 	margin-top: 0;
-    font-size: 25px;    
+    font-size: 25px !important;    
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     letter-spacing: 1.5px;
@@ -600,6 +600,9 @@ span.onsale {
 .h1_p{
 	font-size: 16px!important;
     font-weight: normal!important;
+}
+.ow-navigation .navbar-nav > li > .dropdown-menu > li > a{
+	text-transform: none!important;
 }
 
 

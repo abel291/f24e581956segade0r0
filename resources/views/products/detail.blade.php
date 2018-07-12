@@ -64,7 +64,7 @@
                         @endif
                         <div class="product-meta">
                             <span class="posted_in">
-                                Categoria: <a href="{{$product->category_slug}}">{{$product->category_name}}</a>
+                                Categoria: <a href="{{route('categoria',$product->category_slug)}}">{{$product->category_name}}</a>
                             </span>                                         
                         </div>
                     </div>

@@ -73,6 +73,32 @@ class ProductController extends Controller
 
         
     }
+    public function categoria($categoria)
+    {
+        
+        $products=Product::
+            orderBy('id','desc')
+            ->join('categories', 'products.so_categories_id', '=', 'categories.id')
+            ->where('products.activo',1)          
+            ->select(
+                    'products.*',
+                    'categories.slug as category_slug' ,
+                    'categories.name as category_name',               
+                    'categories.seo_title as category_seo_title',               
+                    'categories.seo_desc as category_seo_desc',               
+                    'categories.seo_keys as category_seo_keys'               
+            );
+        
+        $categories=$products;
+        $categories=$categories->get()->unique('category_name');        
+        $economicos=$products;
+        $economicos=$economicos->where('categories.slug',$categoria)->get()->sortBy('price')->take(5);
+        $products=$products->where('categories.slug',$categoria)->paginate(9);
+        $products->search=$products->first()->category_name;
+                  
+        return view('products.list',compact('products','economicos' ,'categories'));  
+        
+    }
     public function search(Request $request)
     {
         //dd($request->search);

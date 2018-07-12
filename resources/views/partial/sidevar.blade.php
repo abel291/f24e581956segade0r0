@@ -11,7 +11,7 @@
         <h3 class="widget-title">Categorias</h3>
         <div class="tagcloud">
             @foreach($categories as $category)
-            <a href="{{route('product',[$category->category_slug])}}">{{$category->category_name}}</a>
+            <a href="{{route('categoria',[$category->category_slug])}}">{{$category->category_name}}</a>
             @endforeach
              <a href="{{url('/novedades')}}">Novedades</a>                                       
         </div>

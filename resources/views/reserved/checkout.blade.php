@@ -64,7 +64,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2 politicas">                                            
                                             <input type="checkbox" required  style="margin: 0px;">
-                                            <label class="text-uppercase" style="margin-bottom: 0px;">Acepto las  <a href="{{route('page','politicas-legales')}}">Politicas de privacidad</a></label>
+                                            <label class="text-uppercase" style="margin-bottom: 0px;">Acepto las  <a href="{{route('politicasLegales')}}">Politicas de privacidad</a></label>
                                         </div>                                          
                                     </div>
                                     <div class="row">

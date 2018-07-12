@@ -10,9 +10,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                    <h1 class="os-font">{{ $page->title }}</h1>
-                    <p class="dark-color">{!! $page->entry !!}</p>                    
+                <div data-wow-delay="0.3s" class="single-page-title text-center mb-6 wow fadeInUp">
+                    <h1 class="h1_p">{{$page->title}}</h1>
+                    <h2 class="os-font">{{$page->entry}}</h2>  
+                             
                     <div class="heading-line"></div>
                 </div>
             </div>

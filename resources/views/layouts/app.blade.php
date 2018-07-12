@@ -11,7 +11,7 @@
     
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | {{config('app.name')}}</title>   
+    <title>@yield('title')</title>   
     <link rel="icon" type="image/x-icon" href="{{ asset('/segade/img/favicon.ico')}}" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images//apple-touch-icon-114x114-precomposed.png">    
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images//apple-touch-icon-72x72-precomposed.png">   
@@ -67,8 +67,8 @@
                                 <div class="navbar-collapse collapse navbar-right" id="navbar">
                                     <ul class="nav navbar-nav navbar-right">                                       
 
-                                        <li class="{{Request::is('compra-de-oro*') ? 'active' : '' }} ">
-                                            <a href="{{route('page','compra-de-oro')}}" >Compra y venta de oro</a>                              
+                                        <li class="{{Request::is('compra-venta-oro-malaga*') ? 'active' : '' }} ">
+                                            <a href="{{route('compraOro')}}" >Compra y venta de oro</a>                              
                                         </li>
 
                                         <li class="dropdown {{ \Route::current()->getName() === 'categories' ? 'active' : '' }} ">
@@ -76,17 +76,18 @@
                                             <i class="ddl-switch fa fa-angle-down"></i>
                                             <ul class="dropdown-menu" role="menu">
                                                 @foreach($categories->sortBy('category_name') as $category)
-                                                <li><a href="{{route('product',[$category->category_slug])}}">{{$category->category_name}}</a></li>
+                                                <li><a href="{{route('categoria',[$category->category_slug])}}">{{$category->category_name}}</a></li>
                                                 @endforeach
                                                 <li><a href="{{url('/novedades')}}">Novedades</a></li>                                               
                                             </ul>
                                         </li>
+                                        <li class="{{Request::is('page/empeno') ? 'active' : '' }} ">
+                                            <a href="{{route('empeno')}}">Empeño</a>                              
+                                        </li> 
                                         <li class="{{Request::is('blog*') ? 'active' : '' }} ">
                                             <a href="{{route('blog')}}" >Blog</a>                              
                                         </li> 
-                                        <li class="{{Request::is('page/empeno') ? 'active' : '' }} ">
-                                            <a href="{{route('empeno')}}">Empeño</a>                              
-                                        </li >                                        
+                                                                               
                                         <li class="dropdown ">
                                             @if(auth()->check())
                                                 <a  class="dropdown-toggle "role="button" aria-haspopup="true" aria-expanded="false">
@@ -133,7 +134,7 @@
         </div>
     </div>
 
-    <footer class="container-fluid no-left-padding no-right-padding footer-2">
+    <footer class="container-fluid no-left-padding no-right-padding footer-2 pt-5">
         <div class="container">
             <div class="template-info">
                 <a href="{{route('home')}}" class="footer-img"><img src="{{url('/segade/img/logo_b.png')}}" alt="Casa de empeños en Málaga" title="Casa de empeños en Málaga" /></a>
@@ -142,14 +143,14 @@
                 <ul>                    
                     <li><a href="https://www.facebook.com/segadecomprooro/" title="facebook">facebook</a></li>
                     <li><a href="https://plus.google.com/u/1/108107907386449557440" title="google+">google+</a></li>
-                    <li><a href="{{route('page','politicas-legales')}}" title="Politicas Legales">Politicas Legales</a></li>
+                    <li><a href="{{route('politicasLegales')}}" title="Politicas Legales">Politicas Legales</a></li>
                     <li><a href="{{route('contactos')}}" title="Contacto">Contacto</a></li>
-                    <li><a href="{{route('page','quienes-somos')}}" title="Quiene Somos">Quiene Somos</a></li>
+                    <li><a href="{{route('quieneSomos')}}" title="Quiene Somos">Quienes Somos</a></li>
                     
                 </ul>
             </div>
         </div><!-- Container /- -->
-        <div class="copyright">
+        <div class="copyright mt-5">
 
             <p>(c) {{date('Y')}} Desarrollado con <i class="fa fa-heart" style="color:red"></i> por <a href="https://rocketfy.es" title="Diseño web en Málaga" target="blank">Rocketfy</a></p>
         </div>

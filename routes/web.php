@@ -62,6 +62,12 @@ Route::get('/page/{slug}', 'PageController@index')->name('page');
 
 Route::get('/empeno-malaga', 'PageController@empeno')->name('empeno');
 
+Route::get('/compra-venta-oro-malaga', 'PageController@compraOro')->name('compraOro');
+
+Route::get('/quienes-somos', 'PageController@quieneSomos')->name('quieneSomos');
+
+Route::get('/politicas-legales', 'PageController@politicasLegales')->name('politicasLegales');
+
 Route::get('/cesta', 'ReservedController@reserved')->name('reserved')->middleware('auth');
 
 Route::post('/agregar', 'ReservedController@add')->name('add')->middleware('auth');
@@ -78,10 +84,13 @@ Route::get('/busqueda', 'ProductController@search')->name('search');
 
 Route::get('/blog', 'BlogController@index')->name('blog');
 
+
+
 Route::get('/blog/{categoria}/{slug?}/', 'BlogController@entradas')->name('entradas');
 
 //Route::get('/novedades', 'ProductController@novedades')->name('novedades');
 
+Route::get('/compra-venta-malaga-{categoria}/', 'ProductController@categoria')->name('categoria');
 Route::get('/{categoria}/{slug?}/', 'ProductController@product')->name('product');
 
 

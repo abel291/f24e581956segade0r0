@@ -22,9 +22,31 @@ class PageController extends Controller
     	$categories=$this->categories;
     	return view('page.index',compact('page','categories'));
     }
+    
     public function empeno()
     { 
       $page=Page::where('slug','empeno-malaga')->first();
+      $categories=$this->categories;
+      return view('page.index',compact('page','categories'));
+    }
+
+    public function compraOro()
+    { 
+      $page=Page::where('slug','compra-venta-oro-malaga')->first();
+      $categories=$this->categories;
+      return view('page.index',compact('page','categories'));
+    }
+
+    public function quieneSomos()
+    { 
+      $page=Page::where('slug','quienes-somos')->first();
+      $categories=$this->categories;
+      return view('page.index',compact('page','categories'));
+    }
+
+    public function politicasLegales()
+    { 
+      $page=Page::where('slug','politicas-legales')->first();
       $categories=$this->categories;
       return view('page.index',compact('page','categories'));
     }

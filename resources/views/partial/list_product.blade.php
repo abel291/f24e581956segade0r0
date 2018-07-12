@@ -23,7 +23,7 @@
             <div class="fw-600" title="{{$product->title}}">{{str_limit($product->title,55)}}</div>
         </a>
         <div class="product-cate">
-            <a href="{{route('product',[$product->category_slug]) }}">{{$product->category_name}}</a>
+            <a href="{{route('categoria',$product->category_slug)}}">{{$product->category_name}}</a>
             <div class="price  fw-600">{{number_format($product->price,2)}}€ </div>
         </div>
     </div>
